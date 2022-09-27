@@ -36,7 +36,7 @@ class LongAnswerGenerator:
             answer = answer[:-1]
         return answer
 
-    def preprocess_answer_with_tree(self, answer, answer_tree):
+    def preprocess_with_tree(self, answer, answer_tree):
         first_word = answer_tree.descendants[0]
         if first_word.upos == 'PROPN' and answer[0].upper() != answer[0] and len(first_word.form) > 1:
             answer = answer[0].upper() + answer[1:]
@@ -61,7 +61,8 @@ class LongAnswerGenerator:
         answer = self.preprocess_answer(answer)
         question_tree = self.get_tree(*self.parser([question]))
         answer_tree = self.get_tree(*self.parser([answer]))
-        answer, answer_tree = self.preprocess_answer_with_tree(answer, answer_tree)
+        answer, answer_tree = self.preprocess_with_tree(answer, answer_tree)
+        question, question_tree = self.preprocess_with_tree(question, question_tree)
         long_answer = self.generate_long_answer(question, question_tree, answer, answer_tree)
         long_answer = self.postprocess(long_answer)
         return long_answer
@@ -109,30 +110,59 @@ class Case1Handler:
         if idx == -1:
             return answer, answer_tree
 
-
         answer = answer[idx+1:]
         for node in answer_tree.descendants:
             tobreak = node.form in '-—'
             node.remove(children='rehang')
             if tobreak:
                 break
+        
+        if answer_tree.descendants[0].form == 'это':
+            answer_tree.descendants[0].remove(children='rehang')
+            answer = answer[3:]
         return answer.strip(), answer_tree
+
+    def find_this(self, root):
+        if root.next_node and root.next_node.lemma in ['такой', 'это']:
+            return root.next_node
+        if root.prev_node and root.prev_node.lemma in ['такой', 'это']:
+            return root.prev_node
+        return None
 
     def generate(self, question, question_tree, answer, answer_tree):
         if not self.check(question, question_tree):
             return False, None
         
         answer, answer_tree = self.trim_dash(answer, answer_tree)
-
-        # Что такое/Кто такой
-
-        if question_tree.descendants[1].lemma == 'такой':
+        
+        long_answer = answer
+        
+        this_node = self.find_this(get_root(question_tree))
+        question_tree.descendants[-1].remove()
+        if this_node:
+            # Что такое/Кто такой
             root = get_root(question_tree)
-            det = question_tree.descendants[1]
-            det.remove(children='rehang')
+            this_node.remove(children='rehang')
             root.remove(children='rehang')
         
-        question_tree.descendants[-1].remove()
-
-        long_answer = question_tree.compute_text() + " - это " + answer
+            long_answer = question_tree.compute_text() + " - это " + answer
+        elif get_root(question_tree).children[0].udeprel == 'nsubj':
+            # Кто автор...
+            root = get_root(question_tree)
+            root.remove(children='rehang')
+                   
+            long_answer = answer + " - это " + question_tree.compute_text() 
+        elif get_root(question_tree).children[0].udeprel == 'cop':
+            # Кто был...
+            root = get_root(question_tree)
+            root.form = answer
+            aux = root.children[0]
+            aux.shift_before_subtree(root)
+            nsubj = None
+            for node in root.children:
+                if node.udeprel == 'nsubj':
+                    nsubj = node
+                    break
+            nsubj.shift_before_subtree(aux)
+            long_answer = question_tree.compute_text()
         return True, long_answer

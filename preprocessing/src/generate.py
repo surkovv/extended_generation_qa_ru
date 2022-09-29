@@ -3,13 +3,27 @@ from udapi.block.read.conllu import Conllu
 from io import StringIO
 import deeppavlov
 import pymorphy2
+import itertools
 morph = pymorphy2.MorphAnalyzer()
+
+def morph_parse(word, tags=()):
+    parse = morph.parse(word)
+    parse.sort(key = lambda x: x.score, reverse=True)
+    def filter_func(x):
+        f = 1
+        for tag in tags:
+            if tag not in x.tag:
+                f = 0
+                break
+        return f
+    parse = list(filter(filter_func, parse))
+    return parse
 
 Instance = namedtuple('Instance', ['question', 'question_tree', 'answer', 'answer_tree'])
 
 cyrillic_alphabet = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
 class LongAnswerGenerator:
-    
+
     def __init__(self, download=True, parser=None):
         if parser is not None:
             self.parser = parser
@@ -132,7 +146,7 @@ class Case1Handler:
                 node.remove(children='rehang')
                 if tobreak:
                     break
-        
+
         if answer_tree.descendants[0].form == 'это':
             answer_tree.descendants[0].remove(children='rehang')
             answer = answer[3:]
@@ -148,24 +162,24 @@ class Case1Handler:
     def generate(self, question, question_tree, answer, answer_tree):
         if not self.check(question, question_tree):
             return False, None
-        
+
         answer, answer_tree = self.trim_dash(answer, answer_tree)
-        
+
         long_answer = answer
-        
+
         this_node = self.find_this(get_root(question_tree))
         if this_node:
             # Что такое/Кто такой
             root = get_root(question_tree)
             this_node.remove(children='rehang')
             root.remove(children='rehang')
-        
+
             long_answer = question_tree.compute_text() + " - это " + answer
         elif get_root(question_tree).children[0].udeprel == 'nsubj':
             # Кто автор...
             root = get_root(question_tree)
             root.remove(children='rehang')
-                   
+
             long_answer = answer + " - это " + question_tree.compute_text() 
         elif get_root(question_tree).children[0].udeprel == 'cop':
             # Кто был...
@@ -193,7 +207,7 @@ class Reordable:
 
     def reorder_node(self, root):
         # ORDER: nsubj [advmod, ...] root xcomp [obj, ...] [iobj, ...] [obl, ...]
-        
+
         if (not self.can_reorder(root)):
             return
 
@@ -228,26 +242,38 @@ class RootTrimmer:
 
 class Harmonizer:
     case_table = {
-        'Nom': 'nomn',
-        'Gen': 'gent',
-        'Par': 'gent',
-        'Dat': 'datv',
-        'Acc': 'accs',
-        'Loc': 'loct',
-        'Ins': 'ablt',
-        'Voc': 'voct',
-        '': 'nomn'
-    }
+            'Nom': 'nomn',
+            'Gen': 'gent',
+            'Par': 'gent',
+            'Dat': 'datv',
+            'Acc': 'accs',
+            'Loc': 'loct',
+            'Ins': 'ablt',
+            'Voc': 'voct',
+            '': 'nomn'
+            }
     number_table = {
-        'Sing': 'sing',
-        'Plur': 'plur',
-        '': 'sing'
-    }
+            'Sing': 'sing',
+            'Plur': 'plur',
+            '': 'sing'
+            }
+
+    gender_table = {
+            'Masc': 'masc',
+            'Fem': 'femn',
+            'Neut': 'neut'
+            }
     
     def harmonize_verb(self, qword_node, question_tree, answer_tree):
         root = get_root(question_tree)
-        if root.upos != 'VERB' or qword_node.feats['Case'] != 'Nom':
+        if root.upos not in ['VERB', 'AUX'] or qword_node.feats['Case'] != 'Nom':
             return
+        self.harmonize_verb_one(qword_node, question_tree, answer_tree, root)
+        auxes = get_children(root, 'aux')
+        for aux in auxes:
+            self.harmonize_verb_one(qword_node, question_tree, answer_tree, aux)
+
+    def harmonize_verb_one(self, qword_node, question_tree, answer_tree, root):
         number = ''
         aroot = get_root(answer_tree)
         if qword_node.lemma == 'какой':
@@ -263,8 +289,37 @@ class Harmonizer:
             if number != '':
                 params = {self.number_table[number]}
             if params is not None:
-                new_word = morph.parse(root.form)[0].inflect(params).word
+                parsers = list(itertools.chain(
+                    morph_parse(root.form, ["VERB"]),
+                    morph_parse(root.form, ["PRTS"])
+                ))
+                for p in parsers:
+                    inflected = p.inflect(params)
+                    if inflected is not None:
+                        new_word = inflected.word
+                        break
                 root.form = new_word
+
+        # Gender
+        if root.feats['Tense'] == 'Past' and number == 'Sing':
+            gender = ''
+            if qword_node.lemma == 'какой':
+                gender = qword_node.feats['Gender']
+            elif qword_node.lemma in ['кто', 'что', 'чем']:
+                gender = aroot.feats['Gender']
+            if root.feats['Gender'] == '':
+                gender = ''
+            if root.feats['Gender'] != gender:
+                params = None
+                if gender != '':
+                    params = {self.gender_table[gender]}
+                if params is not None:
+                    parsers = list(itertools.chain(
+                        morph_parse(root.form, ["VERB"]),
+                        morph_parse(root.form, ["PRTS"])
+                    ))
+                    new_word = parsers[0].inflect(params).word
+                    root.form = new_word
 
     def harmonize_noun(self, qword_node, question_tree, answer_tree):
         if answer_tree.descendants[0].form.lower() in ['как']:
@@ -273,6 +328,12 @@ class Harmonizer:
         aroot = get_root(answer_tree)
         if aroot.upos not in ['NOUN', 'PNOUN', 'PROPN']:
             return
+
+        preps_qword = get_children(qword_node, 'case')
+        preps = get_children(aroot, 'case')
+        if len(preps_qword) > 0 and len(preps) > 0 and preps[0].form != preps_qword[0].form:
+            return
+
         case, number = '', ''
         if qword_node.lemma == 'какой':
             case = qword_node.feats['Case']
@@ -281,7 +342,9 @@ class Harmonizer:
             case = qword_node.feats['Case']
             number = aroot.feats['Number']
 
-        if aroot.feats['Case'] != case or aroot.feats['Number'] != number:
+        parsers = morph_parse(aroot.form, ['NOUN', self.case_table[qword_node.feats['Case']]])
+
+        if (aroot.upos != 'PROPN' and len(parsers) == 0) or aroot.feats['Number'] != number:
             params = None
             if case != '' and number != '':
                 params = {self.case_table[case], self.number_table[number]}
@@ -290,13 +353,23 @@ class Harmonizer:
             elif case != '':
                 params = {self.case_table[case]}
             if params is not None:
-                parsers = list(filter(lambda x: x.tag.POS == 'NOUN', morph.parse(aroot.form)))
+                parsers = morph_parse(aroot.form, ['NOUN'])
                 if len(parsers) > 0:
                     new_word = parsers[0].inflect(params).word
                     aroot.form = new_word
+                    if aroot.upos == 'PROPN':
+                        aroot.form = aroot.form[0].upper() + aroot.form[1:]
+                for adj in get_children(aroot, 'amod'):
+                    parsers = morph_parse(adj.form, [self.case_table[aroot.feats['Case']]]) 
+                    if len(parsers) > 0:
+                        new_word = parsers[0].inflect(params).word
+                        adj.form = new_word
+                    for adj_conj in get_children(adj, 'conj'):
+                        parsers = morph_parse(adj_conj.form, [self.case_table[aroot.feats['Case']]]) 
+                        if len(parsers) > 0:
+                            new_word = parsers[0].inflect(params).word
+                            adj_conj.form = new_word
 
-        preps_qword = get_children(qword_node, 'case')
-        preps = get_children(aroot, 'case')
         if len(preps_qword) > 0 and len(preps) == 0:
             prep_node = aroot.create_child(deprel='case')
             prep_node.form = prep_node.lemma = preps_qword[0].form

@@ -54,12 +54,12 @@ class LongAnswerGenerator:
 
     def preprocess_with_tree(self, answer, answer_tree):
         first_word = answer_tree.descendants[0]
-        if first_word.upos == 'PROPN' and answer[0].upper() != answer[0] and len(first_word.form) > 1:
+        if first_word.upos in ['PROPN', 'NUM'] and answer[0].upper() != answer[0] and len(first_word.form) > 1:
             answer = answer[0].upper() + answer[1:]
             x = answer_tree.descendants[0].form
             answer_tree.descendants[0].form = x[0].upper() + x[1:]
             return answer, answer_tree 
-        elif first_word.upos != 'PROPN' and answer[0].lower() != answer[0]:
+        elif first_word.upos not in ['PROPN', 'NUM'] and answer[0].lower() != answer[0]:
             answer = answer[0].lower() + answer[1:]
             x = answer_tree.descendants[0].form
             answer_tree.descendants[0].form = x[0].lower() + x[1:]
@@ -124,7 +124,7 @@ def get_children(node, udeprel):
 class Case1Handler:
     def check(self, question, question_tree):
         root = get_root(question_tree)
-        if root.form.lower() in ['кто', 'что']:
+        if root.form.lower() in ['кто', 'что'] or root.lemma.lower() == 'какой':
             return True
         return False
 
@@ -266,7 +266,7 @@ class Harmonizer:
     
     def harmonize_verb(self, qword_node, question_tree, answer_tree):
         root = get_root(question_tree)
-        if root.upos not in ['VERB', 'AUX'] or qword_node.feats['Case'] != 'Nom':
+        if root.upos not in ['VERB', 'AUX', 'ADJ'] or qword_node.feats['Case'] != 'Nom':
             return
         self.harmonize_verb_one(qword_node, question_tree, answer_tree, root)
         auxes = get_children(root, 'aux')
@@ -297,15 +297,13 @@ class Harmonizer:
                     inflected = p.inflect(params)
                     if inflected is not None:
                         new_word = inflected.word
+                        root.form = new_word
                         break
-                root.form = new_word
 
         # Gender
-        if root.feats['Tense'] == 'Past' and number == 'Sing':
+        if root.feats['Gender'] is not None:
             gender = ''
-            if qword_node.lemma == 'какой':
-                gender = qword_node.feats['Gender']
-            elif qword_node.lemma in ['кто', 'что', 'чем']:
+            if qword_node.lemma in ['кто', 'что', 'чем', 'какой']:
                 gender = aroot.feats['Gender']
             if root.feats['Gender'] == '':
                 gender = ''
@@ -316,10 +314,12 @@ class Harmonizer:
                 if params is not None:
                     parsers = list(itertools.chain(
                         morph_parse(root.form, ["VERB"]),
-                        morph_parse(root.form, ["PRTS"])
+                        morph_parse(root.form, ["PRTS"]),
+                        morph_parse(root.form, ["ADJS"])
                     ))
-                    new_word = parsers[0].inflect(params).word
-                    root.form = new_word
+                    if len(parsers) > 0:
+                        new_word = parsers[0].inflect(params).word
+                        root.form = new_word
 
     def harmonize_noun(self, qword_node, question_tree, answer_tree):
         if answer_tree.descendants[0].form.lower() in ['как']:
@@ -329,16 +329,17 @@ class Harmonizer:
         if aroot.upos not in ['NOUN', 'PNOUN', 'PROPN']:
             return
 
-        preps_qword = get_children(qword_node, 'case')
+        preps_depender = qword_node
+        if qword_node.lemma == 'какой':
+            preps_depender = qword_node.parent
+
+        preps_qword = get_children(preps_depender, 'case')
         preps = get_children(aroot, 'case')
         if len(preps_qword) > 0 and len(preps) > 0 and preps[0].form != preps_qword[0].form:
             return
 
         case, number = '', ''
-        if qword_node.lemma == 'какой':
-            case = qword_node.feats['Case']
-            number = qword_node.feats['Number']
-        elif qword_node.lemma in ['кто', 'что', 'чем']:
+        if qword_node.lemma in ['кто', 'что', 'чем', 'какой']:
             case = qword_node.feats['Case']
             number = aroot.feats['Number']
 
@@ -355,10 +356,11 @@ class Harmonizer:
             if params is not None:
                 parsers = morph_parse(aroot.form, ['NOUN'])
                 if len(parsers) > 0:
-                    new_word = parsers[0].inflect(params).word
-                    aroot.form = new_word
-                    if aroot.upos == 'PROPN':
-                        aroot.form = aroot.form[0].upper() + aroot.form[1:]
+                    new_word = parsers[0].inflect(params)
+                    if new_word is not None:
+                        aroot.form = new_word.word
+                        if aroot.upos == 'PROPN':
+                            aroot.form = aroot.form[0].upper() + aroot.form[1:]
                 for adj in get_children(aroot, 'amod'):
                     parsers = morph_parse(adj.form, [self.case_table[aroot.feats['Case']]]) 
                     if len(parsers) > 0:
@@ -372,9 +374,25 @@ class Harmonizer:
 
         if len(preps_qword) > 0 and len(preps) == 0:
             prep_node = aroot.create_child(deprel='case')
-            prep_node.form = prep_node.lemma = preps_qword[0].form
+            prep_node.form = prep_node.lemma = preps_qword[0].compute_text()
             prep_node.upos = 'ADP'
             prep_node.shift_before_subtree(aroot)
+
+    def harmonize_adj(self, anode, main_node):
+        case = main_node.feats['Case']
+        parsers = morph_parse(anode.form, ['ADJF', self.case_table[case]])
+        if len(parsers) == 0:
+            if self.case_table[case] != '':
+                params = {self.case_table[case]}
+                parsers = morph_parse(anode.form, ['ADJF'])
+                if len(parsers) > 0:
+                    new_word = parsers[0].inflect(params).word
+                    anode.form = new_word
+        
+        for node in get_children(anode, 'conj'):
+            self.harmonize_adj(node, main_node)
+        return anode
+
 
     def harmonize(self, qword_node, question_tree, answer_tree):
         self.harmonize_verb(qword_node, question_tree, answer_tree)
@@ -423,3 +441,151 @@ class Case2Handler(RootTrimmer, Harmonizer, Reordable):
             self.reorder_tree(question_tree)
             long_answer = question_tree.compute_text()
         return True, long_answer
+
+
+@handler
+class Case31:
+    # Чей, чья, чьих...
+    def find_qword(self, question_tree):
+        root = get_root(question_tree)
+        if len(root.children) > 0:
+            clause = root.children[0]
+            for word in clause.descendants(add_self=True):
+                if word.lemma in ['чей']:
+                    return word
+        return None
+
+    def check(self, question, question_tree):
+        return self.find_qword(question_tree) != None
+
+    def generate(self, question, question_tree, answer, answer_tree):
+        if not self.check(question, question_tree):
+            return False, None
+
+        qword_node = self.find_qword(question_tree)
+        if qword_node.parent.lemma.lower() == get_root(answer_tree).lemma.lower():
+            croot = qword_node.parent
+        else:
+            croot = qword_node
+            croot.shift_after_node(croot.parent)
+        for c in croot.children:
+            c.remove()
+        croot.form = answer
+        long_answer = question_tree.compute_text()
+        return True, long_answer
+
+
+
+class DateInPrepare:
+    # Привести к виду "в 2022 году ..."
+
+    def is_year(self, node):
+        return node.upos == 'NUM' and '.' not in node.form and '/' not in node.form
+
+    def prepare_date_in(self, answer_tree):
+        root = get_root(answer_tree)
+        if len(root.descendants) == 0 and self.is_year(root):
+            return 'в ' + root.form + ' году'
+        if len(root.descendants) == 1 and self.is_year(root) and root.children[0].form.lower() == 'в':
+            return root.compute_text() + ' году'
+        return answer_tree.compute_text()
+
+@handler
+class Case32(Reordable, DateInPrepare):
+    # В каком году...
+    
+    def check(self, question, question_tree):
+        return self.find_qword(question_tree) != None
+
+    def find_qword(self, question_tree):
+        root = get_root(question_tree)
+        if len(root.children) > 0:
+            clause = root.children[0]
+            for word in clause.descendants(add_self=True):
+                if word.lemma.lower() in ['какой'] and word.parent is not None \
+                and word.parent.form.lower() == 'году':
+                    return word
+        return None
+
+    def generate(self, question, question_tree, answer, answer_tree):
+        if not self.check(question, question_tree):
+            return False, None
+
+        qword_node = self.find_qword(question_tree)
+        placeholder = qword_node.parent
+        for c in placeholder.children:
+            c.remove()
+        placeholder.form = self.prepare_date_in(answer_tree)
+        self.reorder_node(get_root(question_tree))
+        return True, question_tree.compute_text()
+
+
+@handler
+class Case3Name:
+    # Какое название, наименование, имя
+    def check(self, question, question_tree):
+        return self.find_qword(question_tree) != None
+
+    def find_qword(self, question_tree):
+        root = get_root(question_tree)
+        if len(root.children) > 0:
+            clause = root.children[0]
+            for word in clause.descendants(add_self=True):
+                if word.lemma.lower() in ['какой']:
+                    par = word.parent
+                    if par.lemma.lower() in ['название', 'наименование', 'имя', 'идея', 'слово']:
+                        return word
+        return None
+
+    def generate(self, question, question_tree, answer, answer_tree):
+        if not self.check(question, question_tree):
+            return False, None
+
+        qword_node = self.find_qword(question_tree)
+        parent = qword_node.parent
+        qword_node.form = answer
+        qword_node.shift_after_node(parent)
+        long_answer = question_tree.compute_text()
+        return True, long_answer
+
+
+@handler
+class Case3Gen(Reordable, Harmonizer):
+    # "" and other forms
+    def check(self, question, question_tree):
+        return self.find_qword(question_tree) != None
+
+    def find_qword(self, question_tree):
+        root = get_root(question_tree)
+        if len(root.children) > 0:
+            clause = root.children[0]
+            for word in clause.descendants(add_self=True):
+                if word.lemma.lower() in ['какой']:
+                    return word
+        return None
+
+    def generate(self, question, question_tree, answer, answer_tree):
+        if not self.check(question, question_tree):
+            return False, None
+        if len(answer_tree.descendants) >= 5 and \
+            get_root(answer_tree).upos == 'VERB':
+                return True, answer
+        qword_node = self.find_qword(question_tree)
+        placeholder = qword_node.parent
+        aroot = get_root(answer_tree)
+        if aroot.upos in ['ADJ', 'VERB'] and 'Case' in aroot.feats:
+            preps = get_children(aroot, 'case')
+            if len(preps) == 0: 
+                if placeholder.upos in ['NOUN', 'PROPN', 'PNOUN']:
+                    self.harmonize_adj(aroot, placeholder)
+            else:
+                for c in get_children(qword_node.parent, 'case'):
+                    c.remove()
+            qword_node.form = aroot.compute_text()
+        else:
+            self.harmonize(qword_node, question_tree, answer_tree)
+            placeholder.form = aroot.compute_text()
+            for c in placeholder.children:
+                c.remove()
+        
+        return True, question_tree.compute_text()

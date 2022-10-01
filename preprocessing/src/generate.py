@@ -589,3 +589,26 @@ class Case3Gen(Reordable, Harmonizer):
                 c.remove()
         
         return True, question_tree.compute_text()
+
+
+@handler
+class Case4:
+    def check(self, question, question_tree):
+        return self.find_qword(question_tree) != None
+
+    def find_qword(self, question_tree):
+        root = get_root(question_tree)
+        if root.lemma.lower() == 'каков':
+            return root
+        return None
+
+    def generate(self, question, question_tree, answer, answer_tree):
+        if not self.check(question, question_tree):
+            return False, None
+        if len(answer_tree.descendants) >= 5 and \
+            get_root(answer_tree).upos == 'VERB':
+            return True, answer
+        qword_node = self.find_qword(question_tree)
+        qword_node.form = answer + ' -'
+        long_answer = question_tree.compute_text()
+        return True, long_answer

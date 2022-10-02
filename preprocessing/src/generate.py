@@ -486,8 +486,10 @@ class DateInPrepare:
         root = get_root(answer_tree)
         if len(root.descendants) == 0 and self.is_year(root):
             return 'в ' + root.form + ' году'
-        if len(root.descendants) == 1 and self.is_year(root) and root.children[0].form.lower() == 'в':
+        elif len(root.descendants) == 1 and self.is_year(root) and root.children[0].form.lower() == 'в':
             return root.compute_text() + ' году'
+        elif len(root.descendants) == 1 and self.is_year(root.children[0]) and root.form.lower() == 'год':
+            return 'в ' + root.children[0].form + ' году' 
         return answer_tree.compute_text()
 
 @handler
@@ -612,3 +614,60 @@ class Case4:
         qword_node.form = answer + ' -'
         long_answer = question_tree.compute_text()
         return True, long_answer
+
+
+@handler
+class Case5(Reordable, DateInPrepare):
+    # В каком году...
+    
+    def check(self, question, question_tree):
+        return self.find_qword(question_tree) != None
+
+    def find_qword(self, question_tree):
+        root = get_root(question_tree)
+        if len(root.children) > 0:
+            clause = root.children[0]
+            for word in clause.descendants(add_self=True):
+                if word.lemma.lower() in ['когда']:
+                    return word
+        return None
+
+    def generate(self, question, question_tree, answer, answer_tree):
+        if not self.check(question, question_tree):
+            return False, None
+        qword_node = self.find_qword(question_tree)
+        qword_node.form = self.prepare_date_in(answer_tree)
+        return True, question_tree.compute_text()
+
+
+@handler
+class Case6(Reordable):
+    # Где, куда, откуда, докуда 
+    
+    def check(self, question, question_tree):
+        return self.find_qword(question_tree) != None
+
+    def find_qword(self, question_tree):
+        root = get_root(question_tree)
+        if len(root.children) > 0:
+            clause = root.children[0]
+            for word in clause.descendants(add_self=True):
+                if word.lemma.lower() in ['где', 'куда', 'откуда', 'докуда']:
+                    return word
+        return None
+
+    def generate(self, question, question_tree, answer, answer_tree):
+        if not self.check(question, question_tree):
+            return False, None
+        qword_node = self.find_qword(question_tree)
+        qword_node.deprel = 'obl'
+        aroot = get_root(answer_tree)
+        if aroot.upos in ['VERB', 'ADJ']:
+            qword_node.remove()
+            get_root(question_tree).form = answer
+        else:
+            qword_node.form = answer        
+        self.reorder_node(get_root(question_tree))
+        return True, question_tree.compute_text()
+
+

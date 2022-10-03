@@ -692,3 +692,49 @@ class Case7(Reordable):
         return True, answer
 
 
+@handler
+class Case8:
+    # Как ... 
+    def check(self, question, question_tree):
+        return self.find_qword(question_tree) != None
+
+    def find_qword(self, question_tree):
+        root = get_root(question_tree)
+        if len(root.children) > 0:
+            clause = root.children[0]
+            for word in clause.descendants(add_self=True):
+                if word.lemma.lower() in ['как'] and word.udeprel == 'advmod':
+                    return word
+        return None
+
+    def generate(self, question, question_tree, answer, answer_tree):
+        if not self.check(question, question_tree):
+            return False, None
+        if len(answer_tree.descendants) >= 5 and \
+            get_root(answer_tree).upos == 'VERB':
+            return True, answer 
+        root = get_root(question_tree)
+        qword_node = self.find_qword(question_tree)
+        aroot = get_root(answer_tree)
+
+        root.shift_after_node(root.descendants[-1], without_children=1)
+        if root.lemma.lower() == aroot.lemma.lower():
+            aroot.form = ''
+
+        second = question_tree.descendants[1]
+        qword_node.remove()
+        if second.form.lower() in ['быстро', 'долго', 'часто']:
+           second.remove() 
+        is_accs = False
+        if len(morph_parse(aroot.form, ['NOUN', 'accs'])) + len(morph_parse(aroot.form, ['PRTF', 'accs'])) > 0:
+            if len(get_children(aroot, 'case')) == 0:
+                is_accs = True
+        is_called = False
+        if root.lemma.lower() in ['называть', 'называться', 'именоваться']:
+            is_called = True
+        if (root.lemma.lower() in ['переводить', 'описывать', 'переводиться'] or \
+            (is_accs and answer_tree.descendants[0].form.lower() != 'как')) and not is_called:
+            long_answer = root.compute_text().strip() + ' как ' + aroot.compute_text().strip()
+        else:
+            long_answer = root.compute_text().strip() + ' ' + aroot.compute_text().strip()
+        return True, long_answer

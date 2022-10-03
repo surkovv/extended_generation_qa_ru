@@ -670,4 +670,25 @@ class Case6(Reordable):
         self.reorder_node(get_root(question_tree))
         return True, question_tree.compute_text()
 
+@handler
+class Case7(Reordable):
+    # Почему, отчего... 
+    
+    def check(self, question, question_tree):
+        return self.find_qword(question_tree) != None
+
+    def find_qword(self, question_tree):
+        root = get_root(question_tree)
+        if len(root.children) > 0:
+            clause = root.children[0]
+            for word in clause.descendants(add_self=True):
+                if word.lemma.lower() in ['отчего', 'почему']:
+                    return word
+        return None
+
+    def generate(self, question, question_tree, answer, answer_tree):
+        if not self.check(question, question_tree):
+            return False, None
+        return True, answer
+
 

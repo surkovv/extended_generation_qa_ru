@@ -120,6 +120,14 @@ def get_children(node, udeprel):
     return res
 
 
+def get_descendants(node, udeprel):
+    res = []
+    for child in node.descendants:
+        if child.udeprel == udeprel:
+            res.append(child)
+    return res
+
+
 @handler
 class Case1Handler:
     def check(self, question, question_tree):
@@ -267,7 +275,11 @@ class Harmonizer:
     def harmonize_verb(self, qword_node, question_tree, answer_tree):
         root = get_root(question_tree)
         if root.upos not in ['VERB', 'AUX', 'ADJ'] or qword_node.feats['Case'] != 'Nom':
-            return
+            if qword_node.lemma.lower() in ['сколько', 'сколька']: 
+                if get_root(answer_tree).feats['Case'] != 'Nom':
+                    return
+            else:
+                return
         self.harmonize_verb_one(qword_node, question_tree, answer_tree, root)
         auxes = get_children(root, 'aux')
         for aux in auxes:
@@ -278,7 +290,7 @@ class Harmonizer:
         aroot = get_root(answer_tree)
         if qword_node.lemma == 'какой':
             number = aroot.feats['Number']
-        elif qword_node.lemma in ['кто', 'что', 'чем']:
+        elif qword_node.lemma in ['кто', 'что', 'чем', 'сколько', 'сколька']:
             number = aroot.feats['Number']
         if len(get_children(aroot, 'conj')) > 0:
             number = 'Plur'
@@ -400,16 +412,24 @@ class Harmonizer:
 
 
 @handler
-class Case2Handler(RootTrimmer, Harmonizer, Reordable):
+class Case2Handler(RootTrimmer, Harmonizer, Reordable, PrepTrimmer):
     def find_qword(self, question_tree):
         root = get_root(question_tree)
+        if root.lemma.lower() in ['кто', 'что', 'чем']:
+            return root
         if len(root.children) > 0:
             clause = root.children[0]
             for word in clause.descendants(add_self=True):
                 if word.lemma in ['кто', 'что', 'чем']:
                     return word
+        cands = itertools.chain([root], get_children(root, 'xcomp'))
+        for node in cands:
+            for word in node.children:
+                if word.lemma in ['кто', 'что', 'чем']:
+                    return word
+        
         return None
-
+        
     def check(self, question, question_tree):
         return self.find_qword(question_tree) != None
 
@@ -424,7 +444,11 @@ class Case2Handler(RootTrimmer, Harmonizer, Reordable):
             self.harmonize(qword_node, question_tree, answer_tree)
 
         qword_node = self.find_qword(question_tree)
-        if qword_node.form.lower() == 'что' and answer_tree.descendants[0].form.lower() == 'что':
+        if qword_node == get_root(question_tree):
+            PrepTrimmer().trim(qword_node, get_root(answer_tree))
+            qword_node.form = answer_tree.compute_text()
+            long_answer = question_tree.compute_text()
+        elif qword_node.form.lower() == 'что' and answer_tree.descendants[0].form.lower() == 'что':
             qword_node.form = answer_tree.compute_text()
             for c in qword_node.children: 
                 c.remove()
@@ -553,24 +577,22 @@ class Case3Name:
 
 @handler
 class Case3Gen(Reordable, Harmonizer):
-    # "" and other forms
+    # "какой" and other forms
     def check(self, question, question_tree):
         return self.find_qword(question_tree) != None
 
     def find_qword(self, question_tree):
         root = get_root(question_tree)
-        if len(root.children) > 0:
-            clause = root.children[0]
-            for word in clause.descendants(add_self=True):
-                if word.lemma.lower() in ['какой']:
-                    return word
+        for word in root.descendants(add_self=True):
+            if word.lemma.lower() in ['какой']:
+                return word
         return None
 
     def generate(self, question, question_tree, answer, answer_tree):
         if not self.check(question, question_tree):
             return False, None
         if len(answer_tree.descendants) >= 5 and \
-            get_root(answer_tree).upos == 'VERB':
+            get_root(answer_tree).upos in ['VERB']:
                 return True, answer
         qword_node = self.find_qword(question_tree)
         placeholder = qword_node.parent
@@ -649,6 +671,8 @@ class Case6(Reordable):
 
     def find_qword(self, question_tree):
         root = get_root(question_tree)
+        if root.lemma.lower() in ['где', 'куда', 'откуда', 'докуда']:
+            return root
         if len(root.children) > 0:
             clause = root.children[0]
             for word in clause.descendants(add_self=True):
@@ -738,3 +762,186 @@ class Case8:
         else:
             long_answer = root.compute_text().strip() + ' ' + aroot.compute_text().strip()
         return True, long_answer
+
+
+class PrepTrimmer:
+    def trim(self, qword_node, aroot):
+        qc = get_descendants(qword_node.parent, 'case') if qword_node.parent else get_children(qword_node, 'case') 
+        ac = get_children(aroot, 'case')
+        acforms = [c.lemma for c in ac]
+        if len(qc) > 0 and len(ac) > 0:
+            for c in qc:
+                if c.lemma in acforms:
+                    c.remove()
+
+@handler
+class Case9Percent(PrepTrimmer):
+    # Сколько (проценты)
+    def check(self, question, question_tree):
+        return self.find_qword(question_tree) != None
+
+    def find_qword(self, question_tree):
+        root = get_root(question_tree)
+        qword = None
+        if len(root.children) > 0:
+            clause = root.children[0]
+            for word in clause.descendants(add_self=True):
+                if word.lemma.lower() in ['сколько', 'сколька']: 
+                    qword = word
+                    break
+            if not qword:
+                return None
+            for word in question_tree.descendants:
+                if word.lemma.lower() in ['процент']: 
+                    return word, qword
+             
+        return None 
+
+    def generate(self, question, question_tree, answer, answer_tree): 
+        if not self.check(question, question_tree): 
+            return False, None 
+        if len(answer_tree.descendants) >= 5 and \
+            get_root(answer_tree).upos == 'VERB':
+            return True, answer
+        perc_node, qword_node = self.find_qword(question_tree)
+        self.trim(qword_node, get_root(answer_tree))
+
+        if '%' not in answer:
+            answer += '%'
+        for c in get_children(perc_node, 'case'):
+            c.remove()
+        perc_node.remove(children='rehang')
+        qword_node.form = answer
+        return True, question_tree.compute_text()
+
+
+@handler
+class Case9Degrees(PrepTrimmer):
+    # Сколько (градусы)
+    def check(self, question, question_tree):
+        return self.find_qword(question_tree) != None
+
+    def find_qword(self, question_tree):
+        root = get_root(question_tree)
+        qword = None
+        if len(root.children) > 0:
+            clause = root.children[0]
+            for word in clause.descendants(add_self=True):
+                if word.lemma.lower() in ['сколько', 'сколька']: 
+                    qword = word
+                    break
+            if not qword:
+                return None
+            for word in question_tree.descendants:
+                if word.lemma.lower() in ['градус']: 
+                    return word, qword
+             
+        return None 
+
+    def generate(self, question, question_tree, answer, answer_tree): 
+        if not self.check(question, question_tree): 
+            return False, None 
+        if len(answer_tree.descendants) >= 5 and \
+            get_root(answer_tree).upos == 'VERB':
+            return True, answer
+        perc_node, qword_node = self.find_qword(question_tree)
+        self.trim(qword_node, get_root(answer_tree))
+
+        if '°' not in answer and 'градус' not in answer:
+            answer += ' градусов'
+        for c in get_children(perc_node, 'case'):
+            c.remove()
+        perc_node.remove(children='rehang')
+        qword_node.form = answer
+        return True, question_tree.compute_text()
+
+
+@handler
+class Case9Gen(PrepTrimmer, Reordable, Harmonizer):
+    # Сколько (градусы)
+    def check(self, question, question_tree):
+        return self.find_qword(question_tree) != None
+
+    def find_qword(self, question_tree):
+        root = get_root(question_tree)
+        if len(root.children) > 0:
+            clause = root.children[0]
+            for word in clause.descendants(add_self=True):
+                if word.lemma.lower() in ['сколько', 'сколька', 'насколько']: 
+                    return word
+            
+        return None 
+
+    def generate(self, question, question_tree, answer, answer_tree): 
+        if not self.check(question, question_tree): 
+            return False, None 
+        if len(answer_tree.descendants) >= 5 and \
+            get_root(answer_tree).upos in ['VERB', 'ADV']:
+            return True, answer
+        qword_node = self.find_qword(question_tree)
+        aroot = get_root(answer_tree)
+        if aroot.upos in ['NUM', 'SYM'] and get_children(aroot, 'obl') == []:
+            self.trim(qword_node, get_root(answer_tree))
+            qword_node.form = answer
+        elif qword_node.udeprel == 'nsubj':
+            for c in qword_node.children:
+                c.remove()
+            self.harmonize_verb(qword_node, question_tree, answer_tree)
+            qword_node.form = answer
+        else:
+            for c in qword_node.children:
+                c.remove()
+            place = qword_node.parent
+            for anode in answer_tree.descendants:
+                for node in place.descendants(add_self=True):
+                    if anode.lemma.lower() == node.lemma.lower():
+                        node.remove(children='rehang')
+                        break
+            qword_node.form = answer_tree.compute_text()
+
+        #self.reorder_node(get_root(question_tree))
+        return True, question_tree.compute_text()
+
+
+@handler
+class Case10(Reordable):
+    # ли
+    def check(self, question, question_tree):
+        return self.find_qword(question_tree) != None
+
+    def find_qword(self, question_tree):
+        root = get_root(question_tree)
+        if len(root.children) > 0:
+            clause = root.children[0]
+            for word in clause.descendants(add_self=True):
+                if word.lemma.lower() in ['ли']: 
+                    return word
+            
+        return None 
+
+    def generate(self, question, question_tree, answer, answer_tree): 
+        if not self.check(question, question_tree): 
+            return False, None 
+        if len(answer_tree.descendants) >= 5 and \
+            get_root(answer_tree).upos == 'VERB':
+            return True, answer
+        qword_node = self.find_qword(question_tree)
+        placeholder = qword_node.parent
+        qword_node.remove()
+        placeholder.form = answer
+        self.reorder_node(get_root(question_tree))
+        return True, question_tree.compute_text()
+
+@handler
+class Case11(Reordable):
+    # нет вопросных слов
+    def check(self, question, question_tree):
+        return True
+
+    def generate(self, question, question_tree, answer, answer_tree): 
+        if not self.check(question, question_tree): 
+            return False, None 
+        if len(answer_tree.descendants) >= 5 and \
+            get_root(answer_tree).upos == 'VERB':
+            return True, answer
+        return True, answer + ' - ' + question_tree.compute_text() 

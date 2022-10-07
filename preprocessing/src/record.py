@@ -10,13 +10,17 @@ class Record:
 
     @property
     def cqa(self):
-        return [[self.contexts, self.question], self.answer]
+        return [[self.question, self.contexts], self.answer]
 
     @property
     def cqla(self):
         assert self.long_answer is not None
-        return [[self.contexts, self.question], self.long_answer]
+        return [[self.question, self.contexts], self.long_answer]
 
+    @property
+    def all(self):
+        assert self.long_answer is not None
+        return [[self.question, self.contexts], self.answer, self.long_answer]
 
     @property
     def micro(self):

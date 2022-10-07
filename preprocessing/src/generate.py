@@ -78,17 +78,20 @@ class LongAnswerGenerator:
         return answer
 
     def generate_one(self, question, answer):
-        question = self.preprocess_question(question)
-        answer = self.preprocess_answer(answer)
-        question_tree = self.get_tree(*self.parser([question]))
-        question_tree.descendants[-1].remove()
-        answer_tree = self.get_tree(*self.parser([answer]))
-        answer, answer_tree = self.preprocess_with_tree(answer, answer_tree)
-        question, question_tree = self.preprocess_with_tree(question, question_tree)
-        long_answer = self.generate_long_answer(question, question_tree, answer, answer_tree)
-        long_answer = self.postprocess(long_answer)
-        return long_answer
-
+        try:
+            question = self.preprocess_question(question)
+            answer = self.preprocess_answer(answer)
+            question_tree = self.get_tree(*self.parser([question]))
+            question_tree.descendants[-1].remove()
+            answer_tree = self.get_tree(*self.parser([answer]))
+            answer, answer_tree = self.preprocess_with_tree(answer, answer_tree)
+            question, question_tree = self.preprocess_with_tree(question, question_tree)
+            long_answer = self.generate_long_answer(question, question_tree, answer, answer_tree)
+            long_answer = self.postprocess(long_answer)
+            return long_answer
+        except:
+            print(f'ERROR: {question}; {answer}')
+            return None
 
 case_handlers = []
 
@@ -899,7 +902,6 @@ class Case9Gen(PrepTrimmer, Reordable, Harmonizer):
                         break
             qword_node.form = answer_tree.compute_text()
 
-        #self.reorder_node(get_root(question_tree))
         return True, question_tree.compute_text()
 
 

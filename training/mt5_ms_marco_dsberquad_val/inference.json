@@ -34,19 +34,19 @@
     "variables": {
       "MAX_TOKENS" : 50,
       "LOWERCASE": false,
-      "TRANSFORMER": "sberbank-ai/ruT5-base",
+      "TRANSFORMER": "google/mt5-small",
       "PROJECT_PATH": "/data/home/admin/qa",
       "ROOT_PATH": "~/.deeppavlov",
       "DOWNLOADS_PATH": "{ROOT_PATH}/downloads",
       "MODELS_PATH": "{ROOT_PATH}/models",
-      "MODEL_PATH": "{MODELS_PATH}/generative_qa/{TRANSFORMER}-dsberquad",
+      "MODEL_PATH": "{MODELS_PATH}/generative_qa/{TRANSFORMER}-msmarco-dsberquad",
       "URL_PREFIX": "https://files.deeppavlov.ai/deeppavlov_data/extended_generative_qa"
     },
     "download": [
-      {
-        "url": "{URL_PREFIX}/ruT5-dsberquad-2-epochs/new_model.pth.tar",
-        "subdir": "{MODEL_PATH}"
-      }     
+        {
+         "url": "{URL_PREFIX}/mT5-ms-marco+dsberquad-validated/new_model.pth.tar",
+         "subdir": "{MODEL_PATH}"
+        }      
     ]
   }
 }

@@ -1,13 +1,22 @@
 {
+  "dataset_reader": {
+    "class_name": "sq_reader",
+    "valid_size": 2000,
+    "data_path": "{DOWNLOADS_PATH}/ms_marco_preprocessed.json"
+  },
+  "dataset_iterator": {
+    "class_name": "data_learning_iterator"
+  },
   "chainer": {
     "in": ["question", "contexts"],
+    "in_y": ["target"],
     "pipe": [
       {
         "class_name": "torch_transformers_generative_qa_preprocessor",
         "vocab_file": "{TRANSFORMER}",
         "max_seq_length": 512,
         "answer_maxlength": 30,
-        "in": ["question", "contexts"],
+        "in": ["question", "contexts", "target"],
         "out": ["input_ids", "attention_mask", "target_ids"]
       },
       {
@@ -22,31 +31,58 @@
           "betas": [0.9, 0.999],
           "eps": 1e-06
         },
-        "learning_rate_drop_patience": 20,
+        "learning_rate_drop_patience": 5,
         "learning_rate_drop_div": 1.5,
         "in": ["input_ids", "attention_mask"],
-        "out": ["answer"]
+        "in_y": ["target_ids"],
+        "out": ["answer", "ppl"]
       }
     ],
     "out": ["answer"]
+  },
+  "train": {
+    "show_examples": false,
+    "evaluation_targets": [
+      "valid"
+    ],
+    "log_every_n_batches": 100,
+    "val_every_n_batches": 1000,
+    "batch_size": 10,
+    "validation_patience": 10,
+    "metric_optimization": "minimize",
+    "metrics": [
+      {
+        "name": "ppl",
+        "inputs": ["ppl"]
+      },
+      {
+        "name": "squad_v1_f1",
+        "inputs": ["target", "answer"]
+      },
+      {
+        "name": "sacrebleu",
+        "inputs": ["target", "answer"]
+      }
+    ],
+    "class_name": "torch_trainer"
   },
   "metadata": {
     "variables": {
       "MAX_TOKENS" : 50,
       "LOWERCASE": false,
-      "TRANSFORMER": "sberbank-ai/ruT5-base",
+      "TRANSFORMER": "google/mt5-small",
       "PROJECT_PATH": "/data/home/admin/qa",
       "ROOT_PATH": "~/.deeppavlov",
       "DOWNLOADS_PATH": "{ROOT_PATH}/downloads",
       "MODELS_PATH": "{ROOT_PATH}/models",
-      "MODEL_PATH": "{MODELS_PATH}/generative_qa/{TRANSFORMER}-dsberquad",
+      "MODEL_PATH": "{MODELS_PATH}/generative_qa/{TRANSFORMER}-ms-marco",
       "URL_PREFIX": "https://files.deeppavlov.ai/deeppavlov_data/extended_generative_qa"
     },
     "download": [
       {
-        "url": "{URL_PREFIX}/ruT5-dsberquad-2-epochs/new_model.pth.tar",
-        "subdir": "{MODEL_PATH}"
-      }     
-    ]
+        "url": "{URL_PREFIX}/msmarco/ms_marco_preprocessed.json",
+        "subdir": "{DOWNLOADS_PATH}"
+      }
+   ]
   }
 }

@@ -39,14 +39,18 @@
       "ROOT_PATH": "~/.deeppavlov",
       "DOWNLOADS_PATH": "{ROOT_PATH}/downloads",
       "MODELS_PATH": "{ROOT_PATH}/models",
-      "MODEL_PATH": "{MODELS_PATH}/generative_qa/{TRANSFORMER}-dsberquad",
+      "MODEL_PATH": "{MODELS_PATH}/generative_qa/{TRANSFORMER}-ms-marco",
       "URL_PREFIX": "https://files.deeppavlov.ai/deeppavlov_data/extended_generative_qa"
     },
     "download": [
       {
-        "url": "{URL_PREFIX}/ruT5-dsberquad-2-epochs/new_model.pth.tar",
+        "url": "{URL_PREFIX}/msmarco/ms_marco_preprocessed.json",
+        "subdir": "{DOWNLOADS_PATH}"
+      },
+      {
+        "url": "{URL_PREFIX}/ruT5-ms-marco-2-epochs/new_model.pth.tar",
         "subdir": "{MODEL_PATH}"
-      }     
-    ]
+      }
+   ]
   }
 }

@@ -44,7 +44,7 @@
     },
     "download": [
       {
-        "url": "{URL_PREFIX}/ruT5-dsberquad-2-epochs/new_model.pth.tar",
+        "url": "{URL_PREFIX}/ruT5-dsberquad-validated/new_model.pth.tar",
         "subdir": "{MODEL_PATH}"
       }     
     ]

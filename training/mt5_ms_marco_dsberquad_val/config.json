@@ -1,7 +1,6 @@
 {
   "dataset_reader": {
     "class_name": "sq_reader",
-    "valid_size": 2000,
     "data_path": "{DOWNLOADS_PATH}/sbersquad_detailed.json"
   },
   "dataset_iterator": {
@@ -31,8 +30,8 @@
           "betas": [0.9, 0.999],
           "eps": 1e-06
         },
-        "learning_rate_drop_patience": 20,
-        "learning_rate_drop_div": 1.5,
+        "learning_rate_drop_patience": 7,
+        "learning_rate_drop_div": 1.25,
         "in": ["input_ids", "attention_mask"],
         "in_y": ["target_ids"],
         "out": ["answer", "ppl"]
@@ -46,10 +45,9 @@
       "valid"
     ],
     "log_every_n_batches": 200,
-    "val_every_n_batches": 200,
+    "val_every_n_batches": 1000,
     "batch_size": 6,
-    "validation_patience": 100,
-    "epochs": 2,
+    "validation_patience": 10,
     "metric_optimization": "minimize",
     "metrics": [
       {
@@ -81,13 +79,17 @@
       "ROOT_PATH": "~/.deeppavlov",
       "DOWNLOADS_PATH": "{ROOT_PATH}/downloads",
       "MODELS_PATH": "{ROOT_PATH}/models",
-      "MODEL_PATH": "{MODELS_PATH}/generative_qa/{TRANSFORMER}-dsberquad",
+      "MODEL_PATH": "{MODELS_PATH}/generative_qa/{TRANSFORMER}-msmarco-dsberquad",
       "URL_PREFIX": "https://files.deeppavlov.ai/deeppavlov_data/extended_generative_qa"
     },
     "download": [
       {
         "url": "{URL_PREFIX}/sberquad/sbersquad_detailed.json",
         "subdir": "{DOWNLOADS_PATH}"
+      },
+      {
+        "url": "{URL_PREFIX}/mT5-ms-marco-2-epochs/new_model.pth.tar",
+        "subdir": "{MODEL_PATH}"
       }
    ]
   }

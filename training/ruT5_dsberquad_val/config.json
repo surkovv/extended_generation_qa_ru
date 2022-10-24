@@ -1,7 +1,6 @@
 {
   "dataset_reader": {
     "class_name": "sq_reader",
-    "valid_size": 2000,
     "data_path": "{DOWNLOADS_PATH}/sbersquad_detailed.json"
   },
   "dataset_iterator": {
@@ -31,8 +30,8 @@
           "betas": [0.9, 0.999],
           "eps": 1e-06
         },
-        "learning_rate_drop_patience": 20,
-        "learning_rate_drop_div": 1.5,
+        "learning_rate_drop_patience": 7,
+        "learning_rate_drop_div": 1.25,
         "in": ["input_ids", "attention_mask"],
         "in_y": ["target_ids"],
         "out": ["answer", "ppl"]
@@ -46,10 +45,9 @@
       "valid"
     ],
     "log_every_n_batches": 200,
-    "val_every_n_batches": 200,
+    "val_every_n_batches": 1000,
     "batch_size": 6,
-    "validation_patience": 100,
-    "epochs": 2,
+    "validation_patience": 10,
     "metric_optimization": "minimize",
     "metrics": [
       {
@@ -75,7 +73,7 @@
     "variables": {
       "MAX_TOKENS" : 50,
       "LOWERCASE": false,
-      "TRANSFORMER": "google/mt5-small",
+      "TRANSFORMER": "sberbank-ai/ruT5-base",
       "TRANSFORMER1": "t5-base",
       "PROJECT_PATH": "/data/home/admin/qa",
       "ROOT_PATH": "~/.deeppavlov",

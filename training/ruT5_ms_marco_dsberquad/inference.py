@@ -1,5 +1,5 @@
 import deeppavlov
-model = deeppavlov.build_model("inference.json", download=True)
+model = deeppavlov.build_model("inference.json", download=False)
 
 question1 = 'Кто играет Шелдона Купера?'
 question2 = 'В каком сериале снимался Джим Парсонс?'

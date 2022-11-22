@@ -101,6 +101,18 @@ def handler(class_handler):
     return class_handler
 
 
+class PrepTrimmer:
+    def trim(self, qword_node, aroot):
+        qc = get_descendants(qword_node.parent, 'case') if qword_node.parent else get_children(qword_node, 'case') 
+        ac = get_children(aroot, 'case')
+        acforms = [c.lemma for c in ac]
+        if len(qc) > 0 and len(ac) > 0:
+            for c in qc:
+                if c.lemma in acforms:
+                    c.remove()
+
+
+
 class CommonGenerator:
     def generate(self, question, question_tree, answer, answer_tree):
         for handler in case_handlers:
@@ -766,16 +778,6 @@ class Case8:
             long_answer = root.compute_text().strip() + ' ' + aroot.compute_text().strip()
         return True, long_answer
 
-
-class PrepTrimmer:
-    def trim(self, qword_node, aroot):
-        qc = get_descendants(qword_node.parent, 'case') if qword_node.parent else get_children(qword_node, 'case') 
-        ac = get_children(aroot, 'case')
-        acforms = [c.lemma for c in ac]
-        if len(qc) > 0 and len(ac) > 0:
-            for c in qc:
-                if c.lemma in acforms:
-                    c.remove()
 
 @handler
 class Case9Percent(PrepTrimmer):

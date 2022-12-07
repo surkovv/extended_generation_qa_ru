@@ -1,0 +1,715 @@
+nohup: ignoring input
+2022-10-10 00:33:46.456 INFO in 'deeppavlov.core.data.utils'['utils'] at line 95: Downloading from https://files.deeppavlov.ai/deeppavlov_data/extended_generative_qa/ruT5-dsberquad-2-epochs/new_model.pth.tar?config=evaluate to /data/home/admin/.deeppavlov/models/generative_qa/sberbank-ai/ruT5-base-dsberquad/new_model.pth.tar
+  0%|          | 0.00/2.68G [00:00<?, ?B/s]  1%|          | 14.0M/2.68G [00:00<00:18, 140MB/s]  1%|▏         | 38.3M/2.68G [00:00<00:13, 200MB/s]  2%|▏         | 61.6M/2.68G [00:00<00:12, 215MB/s]  3%|▎         | 83.4M/2.68G [00:00<00:11, 216MB/s]  4%|▍         | 106M/2.68G [00:00<00:11, 220MB/s]   5%|▍         | 129M/2.68G [00:00<00:11, 223MB/s]  6%|▌         | 152M/2.68G [00:00<00:11, 225MB/s]  7%|▋         | 175M/2.68G [00:00<00:11, 227MB/s]  7%|▋         | 198M/2.68G [00:00<00:10, 229MB/s]  8%|▊         | 222M/2.68G [00:01<00:10, 230MB/s]  9%|▉         | 245M/2.68G [00:01<00:10, 229MB/s] 10%|█         | 268M/2.68G [00:01<00:10, 229MB/s] 11%|█         | 291M/2.68G [00:01<00:10, 230MB/s] 12%|█▏        | 315M/2.68G [00:01<00:10, 232MB/s] 13%|█▎        | 338M/2.68G [00:01<00:10, 233MB/s] 14%|█▎        | 361M/2.68G [00:01<00:09, 233MB/s] 14%|█▍        | 385M/2.68G [00:01<00:09, 233MB/s] 15%|█▌        | 408M/2.68G [00:01<00:09, 230MB/s] 16%|█▌        | 432M/2.68G [00:01<00:09, 231MB/s] 17%|█▋        | 455M/2.68G [00:02<00:09, 232MB/s] 18%|█▊        | 478M/2.68G [00:02<00:09, 232MB/s] 19%|█▉        | 502M/2.68G [00:02<00:09, 233MB/s] 20%|█▉        | 525M/2.68G [00:02<00:09, 234MB/s] 21%|██        | 549M/2.68G [00:02<00:09, 234MB/s] 21%|██▏       | 572M/2.68G [00:02<00:09, 232MB/s] 22%|██▏       | 596M/2.68G [00:02<00:08, 234MB/s] 23%|██▎       | 620M/2.68G [00:02<00:08, 234MB/s] 24%|██▍       | 643M/2.68G [00:02<00:08, 235MB/s] 25%|██▍       | 667M/2.68G [00:02<00:08, 235MB/s] 26%|██▌       | 690M/2.68G [00:03<00:08, 234MB/s] 27%|██▋       | 714M/2.68G [00:03<00:08, 235MB/s] 28%|██▊       | 738M/2.68G [00:03<00:08, 235MB/s] 28%|██▊       | 762M/2.68G [00:03<00:08, 237MB/s] 29%|██▉       | 785M/2.68G [00:03<00:07, 236MB/s] 30%|███       | 809M/2.68G [00:03<00:07, 235MB/s] 31%|███       | 833M/2.68G [00:03<00:07, 236MB/s] 32%|███▏      | 857M/2.68G [00:03<00:07, 236MB/s] 33%|███▎      | 880M/2.68G [00:03<00:07, 235MB/s] 34%|███▍      | 904M/2.68G [00:03<00:07, 233MB/s] 35%|███▍      | 927M/2.68G [00:04<00:07, 232MB/s] 36%|███▌      | 951M/2.68G [00:04<00:07, 234MB/s] 36%|███▋      | 976M/2.68G [00:04<00:07, 237MB/s] 37%|███▋      | 1.00G/2.68G [00:04<00:06, 239MB/s] 38%|███▊      | 1.02G/2.68G [00:04<00:06, 241MB/s] 39%|███▉      | 1.05G/2.68G [00:04<00:06, 239MB/s] 40%|████      | 1.07G/2.68G [00:04<00:06, 238MB/s] 41%|████      | 1.10G/2.68G [00:04<00:06, 239MB/s] 42%|████▏     | 1.12G/2.68G [00:04<00:06, 239MB/s] 43%|████▎     | 1.14G/2.68G [00:04<00:06, 238MB/s] 44%|████▎     | 1.17G/2.68G [00:05<00:06, 237MB/s] 45%|████▍     | 1.19G/2.68G [00:05<00:06, 239MB/s] 45%|████▌     | 1.22G/2.68G [00:05<00:06, 241MB/s] 46%|████▋     | 1.24G/2.68G [00:05<00:06, 239MB/s] 47%|████▋     | 1.26G/2.68G [00:05<00:05, 238MB/s] 48%|████▊     | 1.29G/2.68G [00:05<00:05, 235MB/s] 49%|████▉     | 1.31G/2.68G [00:05<00:05, 233MB/s] 50%|████▉     | 1.34G/2.68G [00:05<00:05, 236MB/s] 51%|█████     | 1.36G/2.68G [00:05<00:05, 236MB/s] 52%|█████▏    | 1.38G/2.68G [00:05<00:05, 225MB/s] 53%|█████▎    | 1.41G/2.68G [00:06<00:05, 217MB/s] 53%|█████▎    | 1.43G/2.68G [00:06<00:05, 222MB/s] 54%|█████▍    | 1.45G/2.68G [00:06<00:05, 226MB/s] 55%|█████▌    | 1.48G/2.68G [00:06<00:05, 229MB/s] 56%|█████▌    | 1.50G/2.68G [00:06<00:05, 232MB/s] 57%|█████▋    | 1.52G/2.68G [00:06<00:04, 234MB/s] 58%|█████▊    | 1.55G/2.68G [00:06<00:05, 224MB/s] 59%|█████▊    | 1.57G/2.68G [00:06<00:05, 215MB/s] 60%|█████▉    | 1.59G/2.68G [00:06<00:05, 213MB/s] 60%|██████    | 1.61G/2.68G [00:07<00:04, 217MB/s] 61%|██████▏   | 1.64G/2.68G [00:07<00:04, 223MB/s] 62%|██████▏   | 1.66G/2.68G [00:07<00:04, 226MB/s] 63%|██████▎   | 1.69G/2.68G [00:07<00:04, 228MB/s] 64%|██████▍   | 1.71G/2.68G [00:07<00:04, 226MB/s] 65%|██████▍   | 1.73G/2.68G [00:07<00:04, 213MB/s] 66%|██████▌   | 1.75G/2.68G [00:07<00:04, 216MB/s] 66%|██████▋   | 1.78G/2.68G [00:07<00:04, 222MB/s] 67%|██████▋   | 1.80G/2.68G [00:07<00:03, 227MB/s] 68%|██████▊   | 1.83G/2.68G [00:07<00:03, 231MB/s] 69%|██████▉   | 1.85G/2.68G [00:08<00:03, 233MB/s] 70%|███████   | 1.87G/2.68G [00:08<00:03, 230MB/s] 71%|███████   | 1.90G/2.68G [00:08<00:03, 219MB/s] 72%|███████▏  | 1.92G/2.68G [00:08<00:03, 224MB/s] 73%|███████▎  | 1.94G/2.68G [00:08<00:03, 227MB/s] 74%|███████▎  | 1.97G/2.68G [00:08<00:03, 229MB/s] 74%|███████▍  | 1.99G/2.68G [00:08<00:02, 230MB/s] 75%|███████▌  | 2.01G/2.68G [00:08<00:02, 232MB/s] 76%|███████▌  | 2.04G/2.68G [00:08<00:02, 228MB/s] 77%|███████▋  | 2.06G/2.68G [00:08<00:02, 213MB/s] 78%|███████▊  | 2.08G/2.68G [00:09<00:02, 210MB/s] 79%|███████▊  | 2.10G/2.68G [00:09<00:02, 201MB/s] 79%|███████▉  | 2.12G/2.68G [00:09<00:02, 199MB/s] 80%|████████  | 2.14G/2.68G [00:09<00:02, 196MB/s] 81%|████████  | 2.16G/2.68G [00:09<00:02, 193MB/s] 82%|████████▏ | 2.18G/2.68G [00:09<00:02, 192MB/s] 82%|████████▏ | 2.20G/2.68G [00:09<00:02, 192MB/s] 83%|████████▎ | 2.22G/2.68G [00:09<00:02, 193MB/s] 84%|████████▎ | 2.24G/2.68G [00:09<00:02, 193MB/s] 84%|████████▍ | 2.26G/2.68G [00:10<00:02, 193MB/s] 85%|████████▌ | 2.28G/2.68G [00:10<00:02, 142MB/s] 86%|████████▌ | 2.30G/2.68G [00:10<00:02, 168MB/s] 87%|████████▋ | 2.33G/2.68G [00:10<00:01, 187MB/s] 88%|████████▊ | 2.35G/2.68G [00:10<00:01, 204MB/s] 89%|████████▉ | 2.38G/2.68G [00:10<00:01, 216MB/s] 90%|████████▉ | 2.40G/2.68G [00:10<00:01, 227MB/s] 91%|█████████ | 2.43G/2.68G [00:10<00:01, 234MB/s] 92%|█████████▏| 2.45G/2.68G [00:10<00:00, 239MB/s] 93%|█████████▎| 2.48G/2.68G [00:11<00:00, 243MB/s] 94%|█████████▎| 2.50G/2.68G [00:11<00:00, 245MB/s] 95%|█████████▍| 2.53G/2.68G [00:11<00:00, 248MB/s] 95%|█████████▌| 2.55G/2.68G [00:11<00:00, 249MB/s] 96%|█████████▋| 2.58G/2.68G [00:11<00:00, 249MB/s] 97%|█████████▋| 2.60G/2.68G [00:11<00:00, 251MB/s] 98%|█████████▊| 2.63G/2.68G [00:11<00:00, 252MB/s] 99%|█████████▉| 2.66G/2.68G [00:11<00:00, 251MB/s]100%|██████████| 2.68G/2.68G [00:11<00:00, 226MB/s]
+2022-10-10 00:33:58.395 INFO in 'deeppavlov.core.data.utils'['utils'] at line 95: Downloading from https://files.deeppavlov.ai/deeppavlov_data/extended_generative_qa/sberquad/sbersquad_detailed.json?config=evaluate to /data/home/admin/.deeppavlov/downloads/sbersquad_detailed.json
+  0%|          | 0.00/66.0M [00:00<?, ?B/s] 28%|██▊       | 18.4M/66.0M [00:00<00:00, 184MB/s] 67%|██████▋   | 44.1M/66.0M [00:00<00:00, 227MB/s]100%|██████████| 66.0M/66.0M [00:00<00:00, 231MB/s]
+[nltk_data] Downloading package punkt to /home/admin/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+[nltk_data] Downloading package stopwords to /home/admin/nltk_data...
+[nltk_data]   Package stopwords is already up-to-date!
+[nltk_data] Downloading package perluniprops to
+[nltk_data]     /home/admin/nltk_data...
+[nltk_data]   Package perluniprops is already up-to-date!
+[nltk_data] Downloading package nonbreaking_prefixes to
+[nltk_data]     /home/admin/nltk_data...
+[nltk_data]   Package nonbreaking_prefixes is already up-to-date!
+2022-10-10 00:34:15.841 INFO in 'deeppavlov.models.torch_bert.torch_generative_qa'['torch_generative_qa'] at line 145: From pretrained sberbank-ai/ruT5-base.
+2022-10-10 00:34:27.299 INFO in 'deeppavlov.models.torch_bert.torch_generative_qa'['torch_generative_qa'] at line 174: Load path /data/home/admin/.deeppavlov/models/generative_qa/sberbank-ai/ruT5-base-dsberquad/new_model is given.
+2022-10-10 00:34:27.299 INFO in 'deeppavlov.models.torch_bert.torch_generative_qa'['torch_generative_qa'] at line 181: Load path /data/home/admin/.deeppavlov/models/generative_qa/sberbank-ai/ruT5-base-dsberquad/new_model.pth.tar exists.
+2022-10-10 00:34:27.299 INFO in 'deeppavlov.models.torch_bert.torch_generative_qa'['torch_generative_qa'] at line 182: Initializing `TorchGenerativeQA` from saved.
+2022-10-10 00:34:27.299 INFO in 'deeppavlov.models.torch_bert.torch_generative_qa'['torch_generative_qa'] at line 185: Loading weights from /data/home/admin/.deeppavlov/models/generative_qa/sberbank-ai/ruT5-base-dsberquad/new_model.pth.tar.
+2022-10-10 00:34:28.417 INFO in 'deeppavlov.core.models.torch_model'['torch_model'] at line 102: Model was successfully initialized! Model summary:
+ T5ForConditionalGeneration(
+  (shared): Embedding(32128, 768)
+  (encoder): T5Stack(
+    (embed_tokens): Embedding(32128, 768)
+    (block): ModuleList(
+      (0): T5Block(
+        (layer): ModuleList(
+          (0): T5LayerSelfAttention(
+            (SelfAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+              (relative_attention_bias): Embedding(32, 12)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (1): T5LayerFF(
+            (DenseReluDense): T5DenseReluDense(
+              (wi): Linear(in_features=768, out_features=3072, bias=False)
+              (wo): Linear(in_features=3072, out_features=768, bias=False)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+      (1): T5Block(
+        (layer): ModuleList(
+          (0): T5LayerSelfAttention(
+            (SelfAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (1): T5LayerFF(
+            (DenseReluDense): T5DenseReluDense(
+              (wi): Linear(in_features=768, out_features=3072, bias=False)
+              (wo): Linear(in_features=3072, out_features=768, bias=False)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+      (2): T5Block(
+        (layer): ModuleList(
+          (0): T5LayerSelfAttention(
+            (SelfAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (1): T5LayerFF(
+            (DenseReluDense): T5DenseReluDense(
+              (wi): Linear(in_features=768, out_features=3072, bias=False)
+              (wo): Linear(in_features=3072, out_features=768, bias=False)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+      (3): T5Block(
+        (layer): ModuleList(
+          (0): T5LayerSelfAttention(
+            (SelfAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (1): T5LayerFF(
+            (DenseReluDense): T5DenseReluDense(
+              (wi): Linear(in_features=768, out_features=3072, bias=False)
+              (wo): Linear(in_features=3072, out_features=768, bias=False)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+      (4): T5Block(
+        (layer): ModuleList(
+          (0): T5LayerSelfAttention(
+            (SelfAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (1): T5LayerFF(
+            (DenseReluDense): T5DenseReluDense(
+              (wi): Linear(in_features=768, out_features=3072, bias=False)
+              (wo): Linear(in_features=3072, out_features=768, bias=False)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+      (5): T5Block(
+        (layer): ModuleList(
+          (0): T5LayerSelfAttention(
+            (SelfAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (1): T5LayerFF(
+            (DenseReluDense): T5DenseReluDense(
+              (wi): Linear(in_features=768, out_features=3072, bias=False)
+              (wo): Linear(in_features=3072, out_features=768, bias=False)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+      (6): T5Block(
+        (layer): ModuleList(
+          (0): T5LayerSelfAttention(
+            (SelfAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (1): T5LayerFF(
+            (DenseReluDense): T5DenseReluDense(
+              (wi): Linear(in_features=768, out_features=3072, bias=False)
+              (wo): Linear(in_features=3072, out_features=768, bias=False)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+      (7): T5Block(
+        (layer): ModuleList(
+          (0): T5LayerSelfAttention(
+            (SelfAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (1): T5LayerFF(
+            (DenseReluDense): T5DenseReluDense(
+              (wi): Linear(in_features=768, out_features=3072, bias=False)
+              (wo): Linear(in_features=3072, out_features=768, bias=False)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+      (8): T5Block(
+        (layer): ModuleList(
+          (0): T5LayerSelfAttention(
+            (SelfAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (1): T5LayerFF(
+            (DenseReluDense): T5DenseReluDense(
+              (wi): Linear(in_features=768, out_features=3072, bias=False)
+              (wo): Linear(in_features=3072, out_features=768, bias=False)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+      (9): T5Block(
+        (layer): ModuleList(
+          (0): T5LayerSelfAttention(
+            (SelfAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (1): T5LayerFF(
+            (DenseReluDense): T5DenseReluDense(
+              (wi): Linear(in_features=768, out_features=3072, bias=False)
+              (wo): Linear(in_features=3072, out_features=768, bias=False)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+      (10): T5Block(
+        (layer): ModuleList(
+          (0): T5LayerSelfAttention(
+            (SelfAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (1): T5LayerFF(
+            (DenseReluDense): T5DenseReluDense(
+              (wi): Linear(in_features=768, out_features=3072, bias=False)
+              (wo): Linear(in_features=3072, out_features=768, bias=False)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+      (11): T5Block(
+        (layer): ModuleList(
+          (0): T5LayerSelfAttention(
+            (SelfAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (1): T5LayerFF(
+            (DenseReluDense): T5DenseReluDense(
+              (wi): Linear(in_features=768, out_features=3072, bias=False)
+              (wo): Linear(in_features=3072, out_features=768, bias=False)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+    )
+    (final_layer_norm): T5LayerNorm()
+    (dropout): Dropout(p=0.1, inplace=False)
+  )
+  (decoder): T5Stack(
+    (embed_tokens): Embedding(32128, 768)
+    (block): ModuleList(
+      (0): T5Block(
+        (layer): ModuleList(
+          (0): T5LayerSelfAttention(
+            (SelfAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+              (relative_attention_bias): Embedding(32, 12)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (1): T5LayerCrossAttention(
+            (EncDecAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (2): T5LayerFF(
+            (DenseReluDense): T5DenseReluDense(
+              (wi): Linear(in_features=768, out_features=3072, bias=False)
+              (wo): Linear(in_features=3072, out_features=768, bias=False)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+      (1): T5Block(
+        (layer): ModuleList(
+          (0): T5LayerSelfAttention(
+            (SelfAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (1): T5LayerCrossAttention(
+            (EncDecAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (2): T5LayerFF(
+            (DenseReluDense): T5DenseReluDense(
+              (wi): Linear(in_features=768, out_features=3072, bias=False)
+              (wo): Linear(in_features=3072, out_features=768, bias=False)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+      (2): T5Block(
+        (layer): ModuleList(
+          (0): T5LayerSelfAttention(
+            (SelfAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (1): T5LayerCrossAttention(
+            (EncDecAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (2): T5LayerFF(
+            (DenseReluDense): T5DenseReluDense(
+              (wi): Linear(in_features=768, out_features=3072, bias=False)
+              (wo): Linear(in_features=3072, out_features=768, bias=False)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+      (3): T5Block(
+        (layer): ModuleList(
+          (0): T5LayerSelfAttention(
+            (SelfAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (1): T5LayerCrossAttention(
+            (EncDecAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (2): T5LayerFF(
+            (DenseReluDense): T5DenseReluDense(
+              (wi): Linear(in_features=768, out_features=3072, bias=False)
+              (wo): Linear(in_features=3072, out_features=768, bias=False)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+      (4): T5Block(
+        (layer): ModuleList(
+          (0): T5LayerSelfAttention(
+            (SelfAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (1): T5LayerCrossAttention(
+            (EncDecAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (2): T5LayerFF(
+            (DenseReluDense): T5DenseReluDense(
+              (wi): Linear(in_features=768, out_features=3072, bias=False)
+              (wo): Linear(in_features=3072, out_features=768, bias=False)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+      (5): T5Block(
+        (layer): ModuleList(
+          (0): T5LayerSelfAttention(
+            (SelfAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (1): T5LayerCrossAttention(
+            (EncDecAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (2): T5LayerFF(
+            (DenseReluDense): T5DenseReluDense(
+              (wi): Linear(in_features=768, out_features=3072, bias=False)
+              (wo): Linear(in_features=3072, out_features=768, bias=False)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+      (6): T5Block(
+        (layer): ModuleList(
+          (0): T5LayerSelfAttention(
+            (SelfAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (1): T5LayerCrossAttention(
+            (EncDecAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (2): T5LayerFF(
+            (DenseReluDense): T5DenseReluDense(
+              (wi): Linear(in_features=768, out_features=3072, bias=False)
+              (wo): Linear(in_features=3072, out_features=768, bias=False)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+      (7): T5Block(
+        (layer): ModuleList(
+          (0): T5LayerSelfAttention(
+            (SelfAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (1): T5LayerCrossAttention(
+            (EncDecAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (2): T5LayerFF(
+            (DenseReluDense): T5DenseReluDense(
+              (wi): Linear(in_features=768, out_features=3072, bias=False)
+              (wo): Linear(in_features=3072, out_features=768, bias=False)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+      (8): T5Block(
+        (layer): ModuleList(
+          (0): T5LayerSelfAttention(
+            (SelfAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (1): T5LayerCrossAttention(
+            (EncDecAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (2): T5LayerFF(
+            (DenseReluDense): T5DenseReluDense(
+              (wi): Linear(in_features=768, out_features=3072, bias=False)
+              (wo): Linear(in_features=3072, out_features=768, bias=False)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+      (9): T5Block(
+        (layer): ModuleList(
+          (0): T5LayerSelfAttention(
+            (SelfAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (1): T5LayerCrossAttention(
+            (EncDecAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (2): T5LayerFF(
+            (DenseReluDense): T5DenseReluDense(
+              (wi): Linear(in_features=768, out_features=3072, bias=False)
+              (wo): Linear(in_features=3072, out_features=768, bias=False)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+      (10): T5Block(
+        (layer): ModuleList(
+          (0): T5LayerSelfAttention(
+            (SelfAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (1): T5LayerCrossAttention(
+            (EncDecAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (2): T5LayerFF(
+            (DenseReluDense): T5DenseReluDense(
+              (wi): Linear(in_features=768, out_features=3072, bias=False)
+              (wo): Linear(in_features=3072, out_features=768, bias=False)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+      (11): T5Block(
+        (layer): ModuleList(
+          (0): T5LayerSelfAttention(
+            (SelfAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (1): T5LayerCrossAttention(
+            (EncDecAttention): T5Attention(
+              (q): Linear(in_features=768, out_features=768, bias=False)
+              (k): Linear(in_features=768, out_features=768, bias=False)
+              (v): Linear(in_features=768, out_features=768, bias=False)
+              (o): Linear(in_features=768, out_features=768, bias=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (2): T5LayerFF(
+            (DenseReluDense): T5DenseReluDense(
+              (wi): Linear(in_features=768, out_features=3072, bias=False)
+              (wo): Linear(in_features=3072, out_features=768, bias=False)
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (layer_norm): T5LayerNorm()
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+        )
+      )
+    )
+    (final_layer_norm): T5LayerNorm()
+    (dropout): Dropout(p=0.1, inplace=False)
+  )
+  (lm_head): Linear(in_features=768, out_features=32128, bias=False)
+)
+/data/home/admin/bachelor/env/lib/python3.7/site-packages/transformers/tokenization_utils_base.py:2227: FutureWarning: The `pad_to_max_length` argument is deprecated and will be removed in a future version, use `padding=True` or `padding='longest'` to pad to the longest sequence in the batch, or use `padding='max_length'` to pad to a max length. In this case, you can give a specific length with `max_length` (e.g. `max_length=45`) or leave max_length to None to pad to the maximal input size of the model (e.g. 512 for Bert).
+  FutureWarning,

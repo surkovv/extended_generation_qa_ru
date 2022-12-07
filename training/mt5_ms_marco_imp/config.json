@@ -1,29 +1,28 @@
 {
   "dataset_reader": {
     "class_name": "sq_reader",
-    "valid_size": 2000,
-    "data_path": "{DOWNLOADS_PATH}/sbersquad_detailed.json"
+    "data_path": "{DOWNLOADS_PATH}/ms_marco_preprocessed.json"
   },
   "dataset_iterator": {
     "class_name": "data_learning_iterator"
   },
   "chainer": {
     "in": ["question", "contexts"],
-    "in_y": ["short_target", "target"],
+    "in_y": ["target"],
     "pipe": [
       {
         "class_name": "torch_transformers_generative_qa_preprocessor",
         "vocab_file": "{TRANSFORMER}",
         "max_seq_length": 512,
-        "answer_maxlength": 30,
+        "answer_maxlength": 50,
         "in": ["question", "contexts", "target"],
         "out": ["input_ids", "attention_mask", "target_ids"]
       },
       {
         "class_name": "torch_generative_qa",
         "pretrained_transformer": "{TRANSFORMER}",
-        "save_path": "{MODEL_PATH}/new_model",
-        "load_path": "{MODEL_PATH}/new_model",
+        "save_path": "{MODEL_PATH}/{NAME}",
+        "load_path": "{MODEL_PATH}/{NAME}",
         "optimizer": "AdamW",
         "optimizer_parameters": {
           "lr": 3e-04,
@@ -31,8 +30,8 @@
           "betas": [0.9, 0.999],
           "eps": 1e-06
         },
-        "learning_rate_drop_patience": 20,
-        "learning_rate_drop_div": 1.5,
+	"learning_rate_drop_patience": 4,
+	"learning_rate_drop_div": 1.5,
         "in": ["input_ids", "attention_mask"],
         "in_y": ["target_ids"],
         "out": ["answer", "ppl"]
@@ -45,11 +44,11 @@
     "evaluation_targets": [
       "valid"
     ],
-    "log_every_n_batches": 200,
-    "val_every_n_batches": 200,
-    "batch_size": 6,
-    "validation_patience": 100,
-    "epochs": 2,
+    "log_every_n_batches": 30,
+    "val_every_n_batches": 3000,
+    "batch_size": 64,
+    "validation_patience": 10,
+    "epochs": 14,
     "metric_optimization": "minimize",
     "metrics": [
       {
@@ -63,16 +62,13 @@
       {
         "name": "sacrebleu",
         "inputs": ["target", "answer"]
-      },
-      {
-        "name": "rouge1_lemma",
-        "inputs": ["short_target", "answer"]
       }
     ],
     "class_name": "torch_trainer"
   },
   "metadata": {
     "variables": {
+      "NAME": "mt5-ms-marco",
       "MAX_TOKENS" : 50,
       "LOWERCASE": false,
       "TRANSFORMER": "google/mt5-small",
@@ -81,17 +77,13 @@
       "ROOT_PATH": "~/.deeppavlov",
       "DOWNLOADS_PATH": "{ROOT_PATH}/downloads",
       "MODELS_PATH": "{ROOT_PATH}/models",
-      "MODEL_PATH": "{MODELS_PATH}/generative_qa/{TRANSFORMER}-msmarco-dsberquad",
+      "MODEL_PATH": "{MODELS_PATH}/generative_qa/{TRANSFORMER}-ms-marco",
       "URL_PREFIX": "https://files.deeppavlov.ai/deeppavlov_data/extended_generative_qa"
     },
     "download": [
       {
-        "url": "{URL_PREFIX}/sberquad/sbersquad_detailed.json",
+        "url": "{URL_PREFIX}/msmarco/ms_marco_preprocessed.json",
         "subdir": "{DOWNLOADS_PATH}"
-      },
-      {
-        "url": "{URL_PREFIX}/mT5-ms-marco+dsberquad-2-epochs/new_model.pth.tar",
-        "subdir": "{MODEL_PATH}"
       }
    ]
   }

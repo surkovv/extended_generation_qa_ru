@@ -1,7 +1,6 @@
 {
   "dataset_reader": {
     "class_name": "sq_reader",
-    "valid_size": 2000,
     "data_path": "{DOWNLOADS_PATH}/sbersquad_detailed.json"
   },
   "dataset_iterator": {
@@ -43,7 +42,7 @@
   "train": {
     "show_examples": false,
     "evaluation_targets": [
-      "valid"
+      "test"
     ],
     "log_every_n_batches": 200,
     "val_every_n_batches": 200,
@@ -75,13 +74,13 @@
     "variables": {
       "MAX_TOKENS" : 50,
       "LOWERCASE": false,
-      "TRANSFORMER": "google/mt5-small",
+      "TRANSFORMER": "sberbank-ai/ruT5-base",
       "TRANSFORMER1": "t5-base",
       "PROJECT_PATH": "/data/home/admin/qa",
       "ROOT_PATH": "~/.deeppavlov",
       "DOWNLOADS_PATH": "{ROOT_PATH}/downloads",
       "MODELS_PATH": "{ROOT_PATH}/models",
-      "MODEL_PATH": "{MODELS_PATH}/generative_qa/{TRANSFORMER}-msmarco-dsberquad",
+      "MODEL_PATH": "{MODELS_PATH}/generative_qa/{TRANSFORMER}-dsberquad",
       "URL_PREFIX": "https://files.deeppavlov.ai/deeppavlov_data/extended_generative_qa"
     },
     "download": [
@@ -90,7 +89,7 @@
         "subdir": "{DOWNLOADS_PATH}"
       },
       {
-        "url": "{URL_PREFIX}/mT5-ms-marco+dsberquad-2-epochs/new_model.pth.tar",
+        "url": "{URL_PREFIX}/ruT5-dsberquad-2-epochs/new_model.pth.tar",
         "subdir": "{MODEL_PATH}"
       }
    ]

@@ -1,7 +1,7 @@
 {
   "dataset_reader": {
     "class_name": "sq_reader",
-    "valid_size": 2000,
+    "valid_size": 20,
     "data_path": "{DOWNLOADS_PATH}/sbersquad_detailed.json"
   },
   "dataset_iterator": {
@@ -43,7 +43,7 @@
   "train": {
     "show_examples": false,
     "evaluation_targets": [
-      "test"
+      "valid"
     ],
     "log_every_n_batches": 200,
     "val_every_n_batches": 200,

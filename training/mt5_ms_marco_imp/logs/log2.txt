@@ -1,0 +1,1080 @@
+nohup: ignoring input
+[nltk_data] Downloading package punkt to /home/surkov/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+[nltk_data] Downloading package stopwords to /home/surkov/nltk_data...
+[nltk_data]   Package stopwords is already up-to-date!
+[nltk_data] Downloading package perluniprops to
+[nltk_data]     /home/surkov/nltk_data...
+[nltk_data]   Package perluniprops is already up-to-date!
+[nltk_data] Downloading package nonbreaking_prefixes to
+[nltk_data]     /home/surkov/nltk_data...
+[nltk_data]   Package nonbreaking_prefixes is already up-to-date!
+/cephfs/home/surkov/env/lib/python3.8/site-packages/transformers/convert_slow_tokenizer.py:446: UserWarning: The sentencepiece tokenizer that you are converting to a fast tokenizer uses the byte fallback option which is not implemented in the fast tokenizers. In practice this means that the fast version of the tokenizer can produce unknown tokens whereas the sentencepiece version would have converted these unknown tokens into a sequence of byte tokens matching the original piece of text.
+  warnings.warn(
+2022-11-22 20:59:07.822 INFO in 'deeppavlov.models.torch_bert.torch_generative_qa'['torch_generative_qa'] at line 150: From pretrained google/mt5-small.
+2022-11-22 20:59:13.716 INFO in 'deeppavlov.models.torch_bert.torch_generative_qa'['torch_generative_qa'] at line 179: Load path /cephfs/home/surkov/.deeppavlov/models/generative_qa/google/mt5-small-ms-marco/mt5-ms-marco is given.
+2022-11-22 20:59:13.717 INFO in 'deeppavlov.models.torch_bert.torch_generative_qa'['torch_generative_qa'] at line 186: Load path /cephfs/home/surkov/.deeppavlov/models/generative_qa/google/mt5-small-ms-marco/mt5-ms-marco.pth.tar exists.
+2022-11-22 20:59:13.717 INFO in 'deeppavlov.models.torch_bert.torch_generative_qa'['torch_generative_qa'] at line 187: Initializing `TorchGenerativeQA` from saved.
+2022-11-22 20:59:13.717 INFO in 'deeppavlov.models.torch_bert.torch_generative_qa'['torch_generative_qa'] at line 190: Loading weights from /cephfs/home/surkov/.deeppavlov/models/generative_qa/google/mt5-small-ms-marco/mt5-ms-marco.pth.tar.
+2022-11-22 20:59:16.562 INFO in 'deeppavlov.core.models.torch_model'['torch_model'] at line 102: Model was successfully initialized! Model summary:
+ DataParallel(
+  (module): T5ForConditionalGeneration(
+    (shared): Embedding(250112, 512)
+    (encoder): T5Stack(
+      (embed_tokens): Embedding(250112, 512)
+      (block): ModuleList(
+        (0): T5Block(
+          (layer): ModuleList(
+            (0): T5LayerSelfAttention(
+              (SelfAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+                (relative_attention_bias): Embedding(32, 6)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (1): T5LayerFF(
+              (DenseReluDense): T5DenseGatedActDense(
+                (wi_0): Linear(in_features=512, out_features=1024, bias=False)
+                (wi_1): Linear(in_features=512, out_features=1024, bias=False)
+                (wo): Linear(in_features=1024, out_features=512, bias=False)
+                (dropout): Dropout(p=0.1, inplace=False)
+                (act): NewGELUActivation()
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+        )
+        (1): T5Block(
+          (layer): ModuleList(
+            (0): T5LayerSelfAttention(
+              (SelfAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (1): T5LayerFF(
+              (DenseReluDense): T5DenseGatedActDense(
+                (wi_0): Linear(in_features=512, out_features=1024, bias=False)
+                (wi_1): Linear(in_features=512, out_features=1024, bias=False)
+                (wo): Linear(in_features=1024, out_features=512, bias=False)
+                (dropout): Dropout(p=0.1, inplace=False)
+                (act): NewGELUActivation()
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+        )
+        (2): T5Block(
+          (layer): ModuleList(
+            (0): T5LayerSelfAttention(
+              (SelfAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (1): T5LayerFF(
+              (DenseReluDense): T5DenseGatedActDense(
+                (wi_0): Linear(in_features=512, out_features=1024, bias=False)
+                (wi_1): Linear(in_features=512, out_features=1024, bias=False)
+                (wo): Linear(in_features=1024, out_features=512, bias=False)
+                (dropout): Dropout(p=0.1, inplace=False)
+                (act): NewGELUActivation()
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+        )
+        (3): T5Block(
+          (layer): ModuleList(
+            (0): T5LayerSelfAttention(
+              (SelfAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (1): T5LayerFF(
+              (DenseReluDense): T5DenseGatedActDense(
+                (wi_0): Linear(in_features=512, out_features=1024, bias=False)
+                (wi_1): Linear(in_features=512, out_features=1024, bias=False)
+                (wo): Linear(in_features=1024, out_features=512, bias=False)
+                (dropout): Dropout(p=0.1, inplace=False)
+                (act): NewGELUActivation()
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+        )
+        (4): T5Block(
+          (layer): ModuleList(
+            (0): T5LayerSelfAttention(
+              (SelfAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (1): T5LayerFF(
+              (DenseReluDense): T5DenseGatedActDense(
+                (wi_0): Linear(in_features=512, out_features=1024, bias=False)
+                (wi_1): Linear(in_features=512, out_features=1024, bias=False)
+                (wo): Linear(in_features=1024, out_features=512, bias=False)
+                (dropout): Dropout(p=0.1, inplace=False)
+                (act): NewGELUActivation()
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+        )
+        (5): T5Block(
+          (layer): ModuleList(
+            (0): T5LayerSelfAttention(
+              (SelfAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (1): T5LayerFF(
+              (DenseReluDense): T5DenseGatedActDense(
+                (wi_0): Linear(in_features=512, out_features=1024, bias=False)
+                (wi_1): Linear(in_features=512, out_features=1024, bias=False)
+                (wo): Linear(in_features=1024, out_features=512, bias=False)
+                (dropout): Dropout(p=0.1, inplace=False)
+                (act): NewGELUActivation()
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+        )
+        (6): T5Block(
+          (layer): ModuleList(
+            (0): T5LayerSelfAttention(
+              (SelfAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (1): T5LayerFF(
+              (DenseReluDense): T5DenseGatedActDense(
+                (wi_0): Linear(in_features=512, out_features=1024, bias=False)
+                (wi_1): Linear(in_features=512, out_features=1024, bias=False)
+                (wo): Linear(in_features=1024, out_features=512, bias=False)
+                (dropout): Dropout(p=0.1, inplace=False)
+                (act): NewGELUActivation()
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+        )
+        (7): T5Block(
+          (layer): ModuleList(
+            (0): T5LayerSelfAttention(
+              (SelfAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (1): T5LayerFF(
+              (DenseReluDense): T5DenseGatedActDense(
+                (wi_0): Linear(in_features=512, out_features=1024, bias=False)
+                (wi_1): Linear(in_features=512, out_features=1024, bias=False)
+                (wo): Linear(in_features=1024, out_features=512, bias=False)
+                (dropout): Dropout(p=0.1, inplace=False)
+                (act): NewGELUActivation()
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+        )
+      )
+      (final_layer_norm): T5LayerNorm()
+      (dropout): Dropout(p=0.1, inplace=False)
+    )
+    (decoder): T5Stack(
+      (embed_tokens): Embedding(250112, 512)
+      (block): ModuleList(
+        (0): T5Block(
+          (layer): ModuleList(
+            (0): T5LayerSelfAttention(
+              (SelfAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+                (relative_attention_bias): Embedding(32, 6)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (1): T5LayerCrossAttention(
+              (EncDecAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (2): T5LayerFF(
+              (DenseReluDense): T5DenseGatedActDense(
+                (wi_0): Linear(in_features=512, out_features=1024, bias=False)
+                (wi_1): Linear(in_features=512, out_features=1024, bias=False)
+                (wo): Linear(in_features=1024, out_features=512, bias=False)
+                (dropout): Dropout(p=0.1, inplace=False)
+                (act): NewGELUActivation()
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+        )
+        (1): T5Block(
+          (layer): ModuleList(
+            (0): T5LayerSelfAttention(
+              (SelfAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (1): T5LayerCrossAttention(
+              (EncDecAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (2): T5LayerFF(
+              (DenseReluDense): T5DenseGatedActDense(
+                (wi_0): Linear(in_features=512, out_features=1024, bias=False)
+                (wi_1): Linear(in_features=512, out_features=1024, bias=False)
+                (wo): Linear(in_features=1024, out_features=512, bias=False)
+                (dropout): Dropout(p=0.1, inplace=False)
+                (act): NewGELUActivation()
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+        )
+        (2): T5Block(
+          (layer): ModuleList(
+            (0): T5LayerSelfAttention(
+              (SelfAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (1): T5LayerCrossAttention(
+              (EncDecAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (2): T5LayerFF(
+              (DenseReluDense): T5DenseGatedActDense(
+                (wi_0): Linear(in_features=512, out_features=1024, bias=False)
+                (wi_1): Linear(in_features=512, out_features=1024, bias=False)
+                (wo): Linear(in_features=1024, out_features=512, bias=False)
+                (dropout): Dropout(p=0.1, inplace=False)
+                (act): NewGELUActivation()
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+        )
+        (3): T5Block(
+          (layer): ModuleList(
+            (0): T5LayerSelfAttention(
+              (SelfAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (1): T5LayerCrossAttention(
+              (EncDecAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (2): T5LayerFF(
+              (DenseReluDense): T5DenseGatedActDense(
+                (wi_0): Linear(in_features=512, out_features=1024, bias=False)
+                (wi_1): Linear(in_features=512, out_features=1024, bias=False)
+                (wo): Linear(in_features=1024, out_features=512, bias=False)
+                (dropout): Dropout(p=0.1, inplace=False)
+                (act): NewGELUActivation()
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+        )
+        (4): T5Block(
+          (layer): ModuleList(
+            (0): T5LayerSelfAttention(
+              (SelfAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (1): T5LayerCrossAttention(
+              (EncDecAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (2): T5LayerFF(
+              (DenseReluDense): T5DenseGatedActDense(
+                (wi_0): Linear(in_features=512, out_features=1024, bias=False)
+                (wi_1): Linear(in_features=512, out_features=1024, bias=False)
+                (wo): Linear(in_features=1024, out_features=512, bias=False)
+                (dropout): Dropout(p=0.1, inplace=False)
+                (act): NewGELUActivation()
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+        )
+        (5): T5Block(
+          (layer): ModuleList(
+            (0): T5LayerSelfAttention(
+              (SelfAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (1): T5LayerCrossAttention(
+              (EncDecAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (2): T5LayerFF(
+              (DenseReluDense): T5DenseGatedActDense(
+                (wi_0): Linear(in_features=512, out_features=1024, bias=False)
+                (wi_1): Linear(in_features=512, out_features=1024, bias=False)
+                (wo): Linear(in_features=1024, out_features=512, bias=False)
+                (dropout): Dropout(p=0.1, inplace=False)
+                (act): NewGELUActivation()
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+        )
+        (6): T5Block(
+          (layer): ModuleList(
+            (0): T5LayerSelfAttention(
+              (SelfAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (1): T5LayerCrossAttention(
+              (EncDecAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (2): T5LayerFF(
+              (DenseReluDense): T5DenseGatedActDense(
+                (wi_0): Linear(in_features=512, out_features=1024, bias=False)
+                (wi_1): Linear(in_features=512, out_features=1024, bias=False)
+                (wo): Linear(in_features=1024, out_features=512, bias=False)
+                (dropout): Dropout(p=0.1, inplace=False)
+                (act): NewGELUActivation()
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+        )
+        (7): T5Block(
+          (layer): ModuleList(
+            (0): T5LayerSelfAttention(
+              (SelfAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (1): T5LayerCrossAttention(
+              (EncDecAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (2): T5LayerFF(
+              (DenseReluDense): T5DenseGatedActDense(
+                (wi_0): Linear(in_features=512, out_features=1024, bias=False)
+                (wi_1): Linear(in_features=512, out_features=1024, bias=False)
+                (wo): Linear(in_features=1024, out_features=512, bias=False)
+                (dropout): Dropout(p=0.1, inplace=False)
+                (act): NewGELUActivation()
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+        )
+      )
+      (final_layer_norm): T5LayerNorm()
+      (dropout): Dropout(p=0.1, inplace=False)
+    )
+    (lm_head): Linear(in_features=512, out_features=250112, bias=False)
+  )
+)
+/cephfs/home/surkov/env/lib/python3.8/site-packages/transformers/tokenization_utils_base.py:2304: FutureWarning: The `pad_to_max_length` argument is deprecated and will be removed in a future version, use `padding=True` or `padding='longest'` to pad to the longest sequence in the batch, or use `padding='max_length'` to pad to a max length. In this case, you can give a specific length with `max_length` (e.g. `max_length=45`) or leave max_length to None to pad to the maximal input size of the model (e.g. 512 for Bert).
+  warnings.warn(
+/cephfs/home/surkov/env/lib/python3.8/site-packages/torch/nn/parallel/_functions.py:68: UserWarning: Was asked to gather along dimension 0, but all input tensors were scalars; will instead unsqueeze and return a vector.
+  warnings.warn('Was asked to gather along dimension 0, but all '
+2022-11-22 21:12:20.106 INFO in 'deeppavlov.core.trainers.nn_trainer'['nn_trainer'] at line 199: Initial best ppl of 1.224
+libibverbs: Warning: couldn't open config directory '/etc/libibverbs.d'.
+2022-11-22 22:06:06.255 INFO in 'deeppavlov.core.trainers.nn_trainer'['nn_trainer'] at line 207: Improved best ppl from 1.224 to 1.2053
+2022-11-22 22:06:06.260 INFO in 'deeppavlov.core.trainers.nn_trainer'['nn_trainer'] at line 209: Saving model
+2022-11-22 22:06:06.261 INFO in 'deeppavlov.core.models.torch_model'['torch_model'] at line 195: Saving model to /cephfs/home/surkov/.deeppavlov/models/generative_qa/google/mt5-small-ms-marco/mt5-ms-marco.pth.tar.
+2022-11-22 23:00:35.966 INFO in 'deeppavlov.core.trainers.nn_trainer'['nn_trainer'] at line 207: Improved best ppl from 1.2053 to 1.2028
+2022-11-22 23:00:35.970 INFO in 'deeppavlov.core.trainers.nn_trainer'['nn_trainer'] at line 209: Saving model
+2022-11-22 23:00:35.970 INFO in 'deeppavlov.core.models.torch_model'['torch_model'] at line 195: Saving model to /cephfs/home/surkov/.deeppavlov/models/generative_qa/google/mt5-small-ms-marco/mt5-ms-marco.pth.tar.
+2022-11-22 23:53:42.687 INFO in 'deeppavlov.core.trainers.nn_trainer'['nn_trainer'] at line 207: Improved best ppl from 1.2028 to 1.1879
+2022-11-22 23:53:42.691 INFO in 'deeppavlov.core.trainers.nn_trainer'['nn_trainer'] at line 209: Saving model
+2022-11-22 23:53:42.691 INFO in 'deeppavlov.core.models.torch_model'['torch_model'] at line 195: Saving model to /cephfs/home/surkov/.deeppavlov/models/generative_qa/google/mt5-small-ms-marco/mt5-ms-marco.pth.tar.
+2022-11-23 00:46:57.633 INFO in 'deeppavlov.core.trainers.nn_trainer'['nn_trainer'] at line 207: Improved best ppl from 1.1879 to 1.1833
+2022-11-23 00:46:57.637 INFO in 'deeppavlov.core.trainers.nn_trainer'['nn_trainer'] at line 209: Saving model
+2022-11-23 00:46:57.638 INFO in 'deeppavlov.core.models.torch_model'['torch_model'] at line 195: Saving model to /cephfs/home/surkov/.deeppavlov/models/generative_qa/google/mt5-small-ms-marco/mt5-ms-marco.pth.tar.
+2022-11-23 01:39:43.583 INFO in 'deeppavlov.core.trainers.nn_trainer'['nn_trainer'] at line 207: Improved best ppl from 1.1833 to 1.1794
+2022-11-23 01:39:43.587 INFO in 'deeppavlov.core.trainers.nn_trainer'['nn_trainer'] at line 209: Saving model
+2022-11-23 01:39:43.587 INFO in 'deeppavlov.core.models.torch_model'['torch_model'] at line 195: Saving model to /cephfs/home/surkov/.deeppavlov/models/generative_qa/google/mt5-small-ms-marco/mt5-ms-marco.pth.tar.
+2022-11-23 02:32:31.599 INFO in 'deeppavlov.core.trainers.nn_trainer'['nn_trainer'] at line 207: Improved best ppl from 1.1794 to 1.1793
+2022-11-23 02:32:31.685 INFO in 'deeppavlov.core.trainers.nn_trainer'['nn_trainer'] at line 209: Saving model
+2022-11-23 02:32:31.686 INFO in 'deeppavlov.core.models.torch_model'['torch_model'] at line 195: Saving model to /cephfs/home/surkov/.deeppavlov/models/generative_qa/google/mt5-small-ms-marco/mt5-ms-marco.pth.tar.
+2022-11-23 03:24:51.899 INFO in 'deeppavlov.core.trainers.nn_trainer'['nn_trainer'] at line 207: Improved best ppl from 1.1793 to 1.1735
+2022-11-23 03:24:51.902 INFO in 'deeppavlov.core.trainers.nn_trainer'['nn_trainer'] at line 209: Saving model
+2022-11-23 03:24:51.903 INFO in 'deeppavlov.core.models.torch_model'['torch_model'] at line 195: Saving model to /cephfs/home/surkov/.deeppavlov/models/generative_qa/google/mt5-small-ms-marco/mt5-ms-marco.pth.tar.
+2022-11-23 04:17:39.345 INFO in 'deeppavlov.core.trainers.nn_trainer'['nn_trainer'] at line 212: Did not improve on the ppl of 1.1735
+2022-11-23 05:10:02.754 INFO in 'deeppavlov.core.trainers.nn_trainer'['nn_trainer'] at line 212: Did not improve on the ppl of 1.1735
+2022-11-23 06:02:09.688 INFO in 'deeppavlov.core.trainers.nn_trainer'['nn_trainer'] at line 207: Improved best ppl from 1.1735 to 1.173
+2022-11-23 06:02:09.691 INFO in 'deeppavlov.core.trainers.nn_trainer'['nn_trainer'] at line 209: Saving model
+2022-11-23 06:02:09.692 INFO in 'deeppavlov.core.models.torch_model'['torch_model'] at line 195: Saving model to /cephfs/home/surkov/.deeppavlov/models/generative_qa/google/mt5-small-ms-marco/mt5-ms-marco.pth.tar.
+2022-11-23 06:54:26.870 INFO in 'deeppavlov.core.trainers.nn_trainer'['nn_trainer'] at line 207: Improved best ppl from 1.173 to 1.1728
+2022-11-23 06:54:26.873 INFO in 'deeppavlov.core.trainers.nn_trainer'['nn_trainer'] at line 209: Saving model
+2022-11-23 06:54:26.874 INFO in 'deeppavlov.core.models.torch_model'['torch_model'] at line 195: Saving model to /cephfs/home/surkov/.deeppavlov/models/generative_qa/google/mt5-small-ms-marco/mt5-ms-marco.pth.tar.
+2022-11-23 07:46:37.144 INFO in 'deeppavlov.core.trainers.nn_trainer'['nn_trainer'] at line 212: Did not improve on the ppl of 1.1728
+2022-11-23 08:38:17.729 INFO in 'deeppavlov.core.trainers.nn_trainer'['nn_trainer'] at line 212: Did not improve on the ppl of 1.1728
+2022-11-23 09:30:20.889 INFO in 'deeppavlov.core.trainers.nn_trainer'['nn_trainer'] at line 212: Did not improve on the ppl of 1.1728
+2022-11-23 10:21:58.77 INFO in 'deeppavlov.core.trainers.nn_trainer'['nn_trainer'] at line 212: Did not improve on the ppl of 1.1728
+2022-11-23 10:21:58.80 INFO in 'deeppavlov.core.models.torch_model'['torch_model'] at line 223: ----------Current LR is decreased in 1.5 times----------
+2022-11-23 10:21:58.80 INFO in 'deeppavlov.models.torch_bert.torch_generative_qa'['torch_generative_qa'] at line 150: From pretrained google/mt5-small.
+2022-11-23 10:22:03.229 INFO in 'deeppavlov.models.torch_bert.torch_generative_qa'['torch_generative_qa'] at line 179: Load path /cephfs/home/surkov/.deeppavlov/models/generative_qa/google/mt5-small-ms-marco/mt5-ms-marco is given.
+2022-11-23 10:22:03.229 INFO in 'deeppavlov.models.torch_bert.torch_generative_qa'['torch_generative_qa'] at line 186: Load path /cephfs/home/surkov/.deeppavlov/models/generative_qa/google/mt5-small-ms-marco/mt5-ms-marco.pth.tar exists.
+2022-11-23 10:22:03.229 INFO in 'deeppavlov.models.torch_bert.torch_generative_qa'['torch_generative_qa'] at line 187: Initializing `TorchGenerativeQA` from saved.
+2022-11-23 10:22:03.229 INFO in 'deeppavlov.models.torch_bert.torch_generative_qa'['torch_generative_qa'] at line 190: Loading weights from /cephfs/home/surkov/.deeppavlov/models/generative_qa/google/mt5-small-ms-marco/mt5-ms-marco.pth.tar.
+2022-11-23 11:14:14.816 INFO in 'deeppavlov.core.trainers.nn_trainer'['nn_trainer'] at line 212: Did not improve on the ppl of 1.1728
+2022-11-23 12:06:17.138 INFO in 'deeppavlov.core.trainers.nn_trainer'['nn_trainer'] at line 207: Improved best ppl from 1.1728 to 1.1699
+2022-11-23 12:06:17.142 INFO in 'deeppavlov.core.trainers.nn_trainer'['nn_trainer'] at line 209: Saving model
+2022-11-23 12:06:17.143 INFO in 'deeppavlov.core.models.torch_model'['torch_model'] at line 195: Saving model to /cephfs/home/surkov/.deeppavlov/models/generative_qa/google/mt5-small-ms-marco/mt5-ms-marco.pth.tar.
+2022-11-23 12:58:45.130 INFO in 'deeppavlov.core.trainers.nn_trainer'['nn_trainer'] at line 212: Did not improve on the ppl of 1.1699
+2022-11-23 13:51:03.354 INFO in 'deeppavlov.core.trainers.nn_trainer'['nn_trainer'] at line 212: Did not improve on the ppl of 1.1699
+2022-11-23 14:31:11.617 INFO in 'deeppavlov.models.torch_bert.torch_generative_qa'['torch_generative_qa'] at line 150: From pretrained google/mt5-small.
+2022-11-23 14:31:16.91 INFO in 'deeppavlov.models.torch_bert.torch_generative_qa'['torch_generative_qa'] at line 179: Load path /cephfs/home/surkov/.deeppavlov/models/generative_qa/google/mt5-small-ms-marco/mt5-ms-marco is given.
+2022-11-23 14:31:16.91 INFO in 'deeppavlov.models.torch_bert.torch_generative_qa'['torch_generative_qa'] at line 186: Load path /cephfs/home/surkov/.deeppavlov/models/generative_qa/google/mt5-small-ms-marco/mt5-ms-marco.pth.tar exists.
+2022-11-23 14:31:16.91 INFO in 'deeppavlov.models.torch_bert.torch_generative_qa'['torch_generative_qa'] at line 187: Initializing `TorchGenerativeQA` from saved.
+2022-11-23 14:31:16.92 INFO in 'deeppavlov.models.torch_bert.torch_generative_qa'['torch_generative_qa'] at line 190: Loading weights from /cephfs/home/surkov/.deeppavlov/models/generative_qa/google/mt5-small-ms-marco/mt5-ms-marco.pth.tar.
+2022-11-23 14:31:18.785 INFO in 'deeppavlov.core.models.torch_model'['torch_model'] at line 102: Model was successfully initialized! Model summary:
+ DataParallel(
+  (module): T5ForConditionalGeneration(
+    (shared): Embedding(250112, 512)
+    (encoder): T5Stack(
+      (embed_tokens): Embedding(250112, 512)
+      (block): ModuleList(
+        (0): T5Block(
+          (layer): ModuleList(
+            (0): T5LayerSelfAttention(
+              (SelfAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+                (relative_attention_bias): Embedding(32, 6)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (1): T5LayerFF(
+              (DenseReluDense): T5DenseGatedActDense(
+                (wi_0): Linear(in_features=512, out_features=1024, bias=False)
+                (wi_1): Linear(in_features=512, out_features=1024, bias=False)
+                (wo): Linear(in_features=1024, out_features=512, bias=False)
+                (dropout): Dropout(p=0.1, inplace=False)
+                (act): NewGELUActivation()
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+        )
+        (1): T5Block(
+          (layer): ModuleList(
+            (0): T5LayerSelfAttention(
+              (SelfAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (1): T5LayerFF(
+              (DenseReluDense): T5DenseGatedActDense(
+                (wi_0): Linear(in_features=512, out_features=1024, bias=False)
+                (wi_1): Linear(in_features=512, out_features=1024, bias=False)
+                (wo): Linear(in_features=1024, out_features=512, bias=False)
+                (dropout): Dropout(p=0.1, inplace=False)
+                (act): NewGELUActivation()
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+        )
+        (2): T5Block(
+          (layer): ModuleList(
+            (0): T5LayerSelfAttention(
+              (SelfAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (1): T5LayerFF(
+              (DenseReluDense): T5DenseGatedActDense(
+                (wi_0): Linear(in_features=512, out_features=1024, bias=False)
+                (wi_1): Linear(in_features=512, out_features=1024, bias=False)
+                (wo): Linear(in_features=1024, out_features=512, bias=False)
+                (dropout): Dropout(p=0.1, inplace=False)
+                (act): NewGELUActivation()
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+        )
+        (3): T5Block(
+          (layer): ModuleList(
+            (0): T5LayerSelfAttention(
+              (SelfAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (1): T5LayerFF(
+              (DenseReluDense): T5DenseGatedActDense(
+                (wi_0): Linear(in_features=512, out_features=1024, bias=False)
+                (wi_1): Linear(in_features=512, out_features=1024, bias=False)
+                (wo): Linear(in_features=1024, out_features=512, bias=False)
+                (dropout): Dropout(p=0.1, inplace=False)
+                (act): NewGELUActivation()
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+        )
+        (4): T5Block(
+          (layer): ModuleList(
+            (0): T5LayerSelfAttention(
+              (SelfAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (1): T5LayerFF(
+              (DenseReluDense): T5DenseGatedActDense(
+                (wi_0): Linear(in_features=512, out_features=1024, bias=False)
+                (wi_1): Linear(in_features=512, out_features=1024, bias=False)
+                (wo): Linear(in_features=1024, out_features=512, bias=False)
+                (dropout): Dropout(p=0.1, inplace=False)
+                (act): NewGELUActivation()
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+        )
+        (5): T5Block(
+          (layer): ModuleList(
+            (0): T5LayerSelfAttention(
+              (SelfAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (1): T5LayerFF(
+              (DenseReluDense): T5DenseGatedActDense(
+                (wi_0): Linear(in_features=512, out_features=1024, bias=False)
+                (wi_1): Linear(in_features=512, out_features=1024, bias=False)
+                (wo): Linear(in_features=1024, out_features=512, bias=False)
+                (dropout): Dropout(p=0.1, inplace=False)
+                (act): NewGELUActivation()
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+        )
+        (6): T5Block(
+          (layer): ModuleList(
+            (0): T5LayerSelfAttention(
+              (SelfAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (1): T5LayerFF(
+              (DenseReluDense): T5DenseGatedActDense(
+                (wi_0): Linear(in_features=512, out_features=1024, bias=False)
+                (wi_1): Linear(in_features=512, out_features=1024, bias=False)
+                (wo): Linear(in_features=1024, out_features=512, bias=False)
+                (dropout): Dropout(p=0.1, inplace=False)
+                (act): NewGELUActivation()
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+        )
+        (7): T5Block(
+          (layer): ModuleList(
+            (0): T5LayerSelfAttention(
+              (SelfAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (1): T5LayerFF(
+              (DenseReluDense): T5DenseGatedActDense(
+                (wi_0): Linear(in_features=512, out_features=1024, bias=False)
+                (wi_1): Linear(in_features=512, out_features=1024, bias=False)
+                (wo): Linear(in_features=1024, out_features=512, bias=False)
+                (dropout): Dropout(p=0.1, inplace=False)
+                (act): NewGELUActivation()
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+        )
+      )
+      (final_layer_norm): T5LayerNorm()
+      (dropout): Dropout(p=0.1, inplace=False)
+    )
+    (decoder): T5Stack(
+      (embed_tokens): Embedding(250112, 512)
+      (block): ModuleList(
+        (0): T5Block(
+          (layer): ModuleList(
+            (0): T5LayerSelfAttention(
+              (SelfAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+                (relative_attention_bias): Embedding(32, 6)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (1): T5LayerCrossAttention(
+              (EncDecAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (2): T5LayerFF(
+              (DenseReluDense): T5DenseGatedActDense(
+                (wi_0): Linear(in_features=512, out_features=1024, bias=False)
+                (wi_1): Linear(in_features=512, out_features=1024, bias=False)
+                (wo): Linear(in_features=1024, out_features=512, bias=False)
+                (dropout): Dropout(p=0.1, inplace=False)
+                (act): NewGELUActivation()
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+        )
+        (1): T5Block(
+          (layer): ModuleList(
+            (0): T5LayerSelfAttention(
+              (SelfAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (1): T5LayerCrossAttention(
+              (EncDecAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (2): T5LayerFF(
+              (DenseReluDense): T5DenseGatedActDense(
+                (wi_0): Linear(in_features=512, out_features=1024, bias=False)
+                (wi_1): Linear(in_features=512, out_features=1024, bias=False)
+                (wo): Linear(in_features=1024, out_features=512, bias=False)
+                (dropout): Dropout(p=0.1, inplace=False)
+                (act): NewGELUActivation()
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+        )
+        (2): T5Block(
+          (layer): ModuleList(
+            (0): T5LayerSelfAttention(
+              (SelfAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (1): T5LayerCrossAttention(
+              (EncDecAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (2): T5LayerFF(
+              (DenseReluDense): T5DenseGatedActDense(
+                (wi_0): Linear(in_features=512, out_features=1024, bias=False)
+                (wi_1): Linear(in_features=512, out_features=1024, bias=False)
+                (wo): Linear(in_features=1024, out_features=512, bias=False)
+                (dropout): Dropout(p=0.1, inplace=False)
+                (act): NewGELUActivation()
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+        )
+        (3): T5Block(
+          (layer): ModuleList(
+            (0): T5LayerSelfAttention(
+              (SelfAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (1): T5LayerCrossAttention(
+              (EncDecAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (2): T5LayerFF(
+              (DenseReluDense): T5DenseGatedActDense(
+                (wi_0): Linear(in_features=512, out_features=1024, bias=False)
+                (wi_1): Linear(in_features=512, out_features=1024, bias=False)
+                (wo): Linear(in_features=1024, out_features=512, bias=False)
+                (dropout): Dropout(p=0.1, inplace=False)
+                (act): NewGELUActivation()
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+        )
+        (4): T5Block(
+          (layer): ModuleList(
+            (0): T5LayerSelfAttention(
+              (SelfAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (1): T5LayerCrossAttention(
+              (EncDecAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (2): T5LayerFF(
+              (DenseReluDense): T5DenseGatedActDense(
+                (wi_0): Linear(in_features=512, out_features=1024, bias=False)
+                (wi_1): Linear(in_features=512, out_features=1024, bias=False)
+                (wo): Linear(in_features=1024, out_features=512, bias=False)
+                (dropout): Dropout(p=0.1, inplace=False)
+                (act): NewGELUActivation()
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+        )
+        (5): T5Block(
+          (layer): ModuleList(
+            (0): T5LayerSelfAttention(
+              (SelfAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (1): T5LayerCrossAttention(
+              (EncDecAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (2): T5LayerFF(
+              (DenseReluDense): T5DenseGatedActDense(
+                (wi_0): Linear(in_features=512, out_features=1024, bias=False)
+                (wi_1): Linear(in_features=512, out_features=1024, bias=False)
+                (wo): Linear(in_features=1024, out_features=512, bias=False)
+                (dropout): Dropout(p=0.1, inplace=False)
+                (act): NewGELUActivation()
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+        )
+        (6): T5Block(
+          (layer): ModuleList(
+            (0): T5LayerSelfAttention(
+              (SelfAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (1): T5LayerCrossAttention(
+              (EncDecAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (2): T5LayerFF(
+              (DenseReluDense): T5DenseGatedActDense(
+                (wi_0): Linear(in_features=512, out_features=1024, bias=False)
+                (wi_1): Linear(in_features=512, out_features=1024, bias=False)
+                (wo): Linear(in_features=1024, out_features=512, bias=False)
+                (dropout): Dropout(p=0.1, inplace=False)
+                (act): NewGELUActivation()
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+        )
+        (7): T5Block(
+          (layer): ModuleList(
+            (0): T5LayerSelfAttention(
+              (SelfAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (1): T5LayerCrossAttention(
+              (EncDecAttention): T5Attention(
+                (q): Linear(in_features=512, out_features=384, bias=False)
+                (k): Linear(in_features=512, out_features=384, bias=False)
+                (v): Linear(in_features=512, out_features=384, bias=False)
+                (o): Linear(in_features=384, out_features=512, bias=False)
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+            (2): T5LayerFF(
+              (DenseReluDense): T5DenseGatedActDense(
+                (wi_0): Linear(in_features=512, out_features=1024, bias=False)
+                (wi_1): Linear(in_features=512, out_features=1024, bias=False)
+                (wo): Linear(in_features=1024, out_features=512, bias=False)
+                (dropout): Dropout(p=0.1, inplace=False)
+                (act): NewGELUActivation()
+              )
+              (layer_norm): T5LayerNorm()
+              (dropout): Dropout(p=0.1, inplace=False)
+            )
+          )
+        )
+      )
+      (final_layer_norm): T5LayerNorm()
+      (dropout): Dropout(p=0.1, inplace=False)
+    )
+    (lm_head): Linear(in_features=512, out_features=250112, bias=False)
+  )
+)

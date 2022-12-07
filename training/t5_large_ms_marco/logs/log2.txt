@@ -1,0 +1,53 @@
+nohup: ignoring input
+[nltk_data] Downloading package punkt to /home/surkov/nltk_data...
+[nltk_data]   Package punkt is already up-to-date!
+[nltk_data] Downloading package stopwords to /home/surkov/nltk_data...
+[nltk_data]   Package stopwords is already up-to-date!
+[nltk_data] Downloading package perluniprops to
+[nltk_data]     /home/surkov/nltk_data...
+[nltk_data]   Package perluniprops is already up-to-date!
+[nltk_data] Downloading package nonbreaking_prefixes to
+[nltk_data]     /home/surkov/nltk_data...
+[nltk_data]   Package nonbreaking_prefixes is already up-to-date!
+/cephfs/home/surkov/env/lib/python3.8/site-packages/transformers/models/t5/tokenization_t5_fast.py:156: FutureWarning: This tokenizer was incorrectly instantiated with a model max length of 512 which will be corrected in Transformers v5.
+For now, this behavior is kept to avoid breaking backwards compatibility when padding/encoding with `truncation is True`.
+- Be aware that you SHOULD NOT rely on t5-large automatically truncating your input to 512 when padding/encoding.
+- If you want to encode/pad to sequences longer than 512 you can either instantiate this tokenizer with `model_max_length` or pass `max_length` when encoding/padding.
+- To avoid this warning, please instantiate this tokenizer with `model_max_length` set to your preferred value.
+  warnings.warn(
+2022-11-27 12:42:25.529 INFO in 'deeppavlov.models.torch_bert.torch_generative_qa'['torch_generative_qa'] at line 150: From pretrained t5-large.
+2022-11-27 12:42:42.991 ERROR in 'deeppavlov.core.common.params'['params'] at line 112: Exception in <class 'deeppavlov.models.torch_bert.torch_generative_qa.TorchGenerativeQA'>
+Traceback (most recent call last):
+  File "/cephfs/home/surkov/env/lib/python3.8/site-packages/deeppavlov/core/common/params.py", line 106, in from_params
+    component = obj(**dict(config_params, **kwargs))
+  File "/cephfs/home/surkov/env/lib/python3.8/site-packages/deeppavlov/models/torch_bert/torch_generative_qa.py", line 73, in __init__
+    super().__init__(optimizer=optimizer,
+  File "/cephfs/home/surkov/env/lib/python3.8/site-packages/deeppavlov/core/models/torch_model.py", line 98, in __init__
+    self.load()
+  File "/cephfs/home/surkov/env/lib/python3.8/site-packages/deeppavlov/models/torch_bert/torch_generative_qa.py", line 172, in load
+    self.optimizer = getattr(torch.optim, self.optimizer_name)(
+AttributeError: module 'torch.optim' has no attribute 'Adafactor'
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/runpy.py", line 194, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/usr/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/cephfs/home/surkov/env/lib/python3.8/site-packages/deeppavlov/__main__.py", line 4, in <module>
+    main()
+  File "/cephfs/home/surkov/env/lib/python3.8/site-packages/deeppavlov/deep.py", line 83, in main
+    train_evaluate_model_from_config(pipeline_config_path,
+  File "/cephfs/home/surkov/env/lib/python3.8/site-packages/deeppavlov/core/commands/train.py", line 121, in train_evaluate_model_from_config
+    trainer.train(iterator)
+  File "/cephfs/home/surkov/env/lib/python3.8/site-packages/deeppavlov/core/trainers/nn_trainer.py", line 334, in train
+    self.fit_chainer(iterator)
+  File "/cephfs/home/surkov/env/lib/python3.8/site-packages/deeppavlov/core/trainers/fit_trainer.py", line 104, in fit_chainer
+    component = from_params(component_config, mode='train')
+  File "/cephfs/home/surkov/env/lib/python3.8/site-packages/deeppavlov/core/common/params.py", line 106, in from_params
+    component = obj(**dict(config_params, **kwargs))
+  File "/cephfs/home/surkov/env/lib/python3.8/site-packages/deeppavlov/models/torch_bert/torch_generative_qa.py", line 73, in __init__
+    super().__init__(optimizer=optimizer,
+  File "/cephfs/home/surkov/env/lib/python3.8/site-packages/deeppavlov/core/models/torch_model.py", line 98, in __init__
+    self.load()
+  File "/cephfs/home/surkov/env/lib/python3.8/site-packages/deeppavlov/models/torch_bert/torch_generative_qa.py", line 172, in load
+    self.optimizer = getattr(torch.optim, self.optimizer_name)(
+AttributeError: module 'torch.optim' has no attribute 'Adafactor'

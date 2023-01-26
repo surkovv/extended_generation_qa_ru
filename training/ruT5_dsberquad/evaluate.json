@@ -1,7 +1,6 @@
 {
   "dataset_reader": {
     "class_name": "sq_reader",
-    "valid_size": 2000,
     "data_path": "{DOWNLOADS_PATH}/sbersquad_detailed.json"
   },
   "dataset_iterator": {

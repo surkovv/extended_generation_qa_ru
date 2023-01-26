@@ -30,4 +30,6 @@ def rouge1_lemma_count_one(answer_true: str, answer_pred: str) -> float:
     for token in tokens_true:
         if token in tokens_pred:
             matched += 1
+    if len(tokens_true) == 0:
+        return 0
     return matched / len(tokens_true)
